@@ -1,0 +1,26 @@
+/* Scoped to the signed-in workspace; public checkout and marketing are untouched. */
+.workspace-shell :is(input,textarea,select,button,a):focus-visible {
+  outline: 2px solid #ff8794;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .workspace-shell input:not([type=checkbox]):not([type=radio]):not([type=file]),
+  .workspace-shell textarea,
+  .workspace-shell select { font-size: 16px; }
+  .workspace-shell .wa-lv-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    overflow: visible;
+    white-space: normal;
+  }
+  .workspace-shell .wa-lv-filters button {
+    min-height: 40px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+.fn-photo,.fn-photo-test{display:flex;flex-direction:column;gap:8px}.fn-photo-note,.fn-photo-warn{margin:0;font-size:12.5px;color:#c9c9cf}.fn-photo-warn{color:#ffb3ba}
+/* Products: keep the page heading and tabs before both owned and affiliate cards. */
+.workspace-content:has(>.bz-products)>.rd-tabs{order:-5}
+.workspace-shell .workspace-content.rd-tabbed>.page-title.bz-products>.rd-head{order:-6}

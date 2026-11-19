@@ -1,0 +1,69 @@
+(() => {
+  if (window.__bizivaBusiness) return; window.__bizivaBusiness = true;
+  const css = document.createElement('style');
+  css.textContent = `.bz-biz{width:min(560px,94vw);max-height:90dvh;padding:26px;border:1px solid #f6efdf1f;border-radius:22px;background:#101014;color:#f6efdf;box-shadow:0 30px 100px #000c;font:15px/1.5 system-ui}.bz-biz::backdrop{background:#000a;backdrop-filter:blur(6px)}.bz-biz h2{font-size:24px;margin:4px 0 2px;font-weight:600}.bz-biz small{color:#ff8799;letter-spacing:.08em;font-size:11px}.bz-biz p{margin:6px 0;color:#c9c3cc}.bz-biz section{margin-top:16px;padding:16px;border:1px solid #f6efdf1a;border-radius:16px;background:#16161b}.bz-biz h3{margin:0 0 6px;font-size:13px;color:#aaa4af;font-weight:600;letter-spacing:.06em;text-transform:uppercase}.bz-biz .ok{color:#f6efdf;font-weight:600}.bz-biz .warn{color:#ffb9c2;font-weight:600}.bz-biz a{color:#f6efdf}.bz-biz button,.bz-biz .bz-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;border-radius:12px;border:1px solid #f6efdf26;background:#24242b;color:#f6efdf;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}.bz-biz .primary{background:#cc1432;border-color:#cc1432}.bz-biz button:disabled{opacity:.5;cursor:default}.bz-biz input{box-sizing:border-box;flex:1;min-width:0;background:#0d0d10;color:#f6efdf;border:1px solid #f6efdf26;border-radius:10px;padding:10px;font:inherit}.bz-biz .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.bz-biz .row>input{flex:1 1 200px}.bz-biz header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.bz-biz [role=alert]{color:#ffb9c2;min-height:1em}.bz-biz :focus-visible{outline:2px solid #ff8799;outline-offset:2px}@media(max-width:600px){.bz-biz{padding:18px}.bz-biz .row>*{flex:1 1 100%}}`;
+  document.head.append(css);
+  const el = (t, x, c) => { const e = document.createElement(t); if (x !== undefined) e.textContent = x; if (c) e.className = c; return e; };
+  const brl = c => Number.isInteger(c) ? (c / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+  async function api(path, method = 'GET', data) { const r = await origFetch(path, { method, credentials: 'same-origin', cache: 'no-store', headers: data ? { 'content-type': 'application/json' } : {}, ...(data ? { body: JSON.stringify(data) } : {}) }); const b = await r.json().catch(() => ({})); if (!r.ok) throw Object.assign(Error(typeof b.error === 'string' ? b.error : 'Não foi possível concluir.'), { status: r.status, body: b }); return b; }
+  async function open(id) {
+    if (!id || document.getElementById('bz-biz')) return;
+    const d = el('dialog', undefined, 'bz-biz'); d.id = 'bz-biz'; d.setAttribute('aria-labelledby', 'bz-biz-t');
+    const head = el('header'), t = el('div'), close = el('button', 'Fechar'); close.type = 'button'; close.onclick = () => d.close();
+    const title = el('h2', 'Carregando…'); title.id = 'bz-biz-t'; t.append(el('small', 'NEGÓCIO CRIADO'), title); head.append(t, close);
+    const alert = el('p'); alert.setAttribute('role', 'alert'); const body = el('div');
+    d.append(head, body, alert); document.body.append(d); d.addEventListener('close', () => d.remove()); d.showModal();
+    let busy = false;
+    const run = async (fn) => { if (busy) return; busy = true; alert.textContent = ''; for (const b of d.querySelectorAll('button:not(:first-child)')) b.disabled = true; try { await fn(); } catch (e) { alert.textContent = e.message; } finally { busy = false; for (const b of d.querySelectorAll('button')) b.disabled = false; } };
+    async function render(s) {
+      title.textContent = s.business.name; body.replaceChildren();
+      const top = el('p'); top.append(el('span', (s.product ? s.product.name + (brl(s.product.priceCents) ? ' · ' + brl(s.product.priceCents) : '') + ' · ' : '')));
+      if (s.business.status === 'published') { const a = el('a', 'Abrir página'); a.href = s.business.path; a.target = '_blank'; a.rel = 'noopener'; top.append(a); } else { top.append(el('span', 'Página em rascunho', 'warn')); if (s.checkout.mode !== 'none') { const pub = el('button', 'Publicar página', 'primary'); pub.type = 'button'; pub.style.marginLeft = '10px'; pub.onclick = () => run(async () => { await api('/api/businesses', 'POST', { action: 'status', id, status: 'published' }); render(await api('/api/businesses/checkout?id=' + encodeURIComponent(id))); }); top.append(pub); } }
+      body.append(top);
+      // Checkout
+      const ck = el('section'); ck.append(el('h3', 'Pagamento'));
+      const m = s.checkout.mode;
+      const label = m === 'mercadopago' ? 'Pelo seu Mercado Pago' : m === 'asaas' ? 'Pela sua conta Asaas' : m === 'whatsapp' ? 'Botão Comprar abre seu WhatsApp' : m === 'link' ? 'Seu link de pagamento' : 'Falta definir. A página só vai ao ar com pagamento.';
+      ck.append(el('p', label, m === 'none' ? 'warn' : 'ok'));
+      if (m === 'mercadopago' || m === 'asaas') { const a = el('a', 'Ver checkout'); a.href = s.checkout.url; a.target = '_blank'; a.rel = 'noopener'; ck.append(a); }
+      const opts = el(m === 'none' ? 'div' : 'details');
+      if (m !== 'none') opts.append(el('summary', 'Trocar'));
+      if (m !== 'mercadopago') { const mp = el('a', 'Conectar Mercado Pago', 'bz-btn' + (m === 'none' ? ' primary' : '')); mp.href = '/app?view=recebimentos'; const r0 = el('div', undefined, 'row'); r0.append(mp); opts.append(r0); }
+      const wa = el('input'); wa.inputMode = 'tel'; wa.placeholder = 'WhatsApp com DDD'; wa.setAttribute('aria-label', 'WhatsApp para vendas'); const waB = el('button', 'Usar WhatsApp'); waB.type = 'button';
+      waB.onclick = () => run(async () => render(await api('/api/businesses/checkout', 'POST', { id, whatsapp: wa.value, publish: true })));
+      const lk = el('input'); lk.inputMode = 'url'; lk.placeholder = 'ou cole o link de pagamento (https://…)'; lk.setAttribute('aria-label', 'Link de pagamento'); const lkB = el('button', 'Usar link'); lkB.type = 'button';
+      lkB.onclick = () => run(async () => render(await api('/api/businesses/checkout', 'POST', { id, link: lk.value, publish: true })));
+      const r1 = el('div', undefined, 'row'), r2 = el('div', undefined, 'row'); r1.append(wa, waB); r2.append(lk, lkB); opts.append(r1, r2); ck.append(opts); body.append(ck);
+      // Funil
+      const fn = el('section'); fn.append(el('h3', 'Funil no WhatsApp'));
+      if (!s.funnel) fn.append(el('p', 'Sem funil para este negócio. Monte pelo módulo Funil.'));
+      else {
+        fn.append(el('p', s.funnel.published ? 'Ligado no seu WhatsApp' : 'Rascunho desligado. Nada foi enviado.', s.funnel.published ? 'ok' : undefined));
+        const row = el('div', undefined, 'row');
+        if (!s.funnel.published) {
+          if (s.whatsappConnected) { const on = el('button', 'Ligar no WhatsApp', 'primary'); on.type = 'button'; on.onclick = () => run(async () => { await api('/api/funnel', 'POST', { action: 'publish', id: s.funnel.id, connectionId: s.connectionId, robot: true }); render(await api('/api/businesses/checkout?id=' + encodeURIComponent(id))); }); row.append(on); }
+          else { const c = el('a', 'Conectar WhatsApp', 'bz-btn primary'); c.href = '/app?view=whatsapp'; row.append(c); }
+        }
+        const ed = el('a', 'Abrir no Funil', 'bz-btn'); ed.href = s.funnel.url; row.append(ed); fn.append(row);
+        if (!s.funnel.published) fn.append(el('p', 'Ligado, ele só responde quem te chamar. Ninguém da sua lista recebe mensagem.'));
+      }
+      body.append(fn);
+      if (s.note) alert.textContent = s.note;
+    }
+    try { await render(await api('/api/businesses/checkout?id=' + encodeURIComponent(id))); } catch (e) { title.textContent = 'Negócio'; alert.textContent = e.message; }
+  }
+  const origFetch = window.fetch.bind(window);
+  window.fetch = async function (input, init) {
+    const res = await origFetch(input, init);
+    try {
+      const u = typeof input === 'string' ? input : input?.url || '';
+      if (/\/api\/businesses(\?|$)/.test(u) && String(init?.method || '').toUpperCase() === 'POST' && typeof init?.body === 'string' && /"action":"compose"/.test(init.body) && res.ok) {
+        res.clone().json().then(j => { if (j?.businessId) setTimeout(() => open(j.businessId), 700); }).catch(() => {});
+      }
+    } catch {}
+    return res;
+  };
+  window.__bizivaOpenBusiness = open;
+  const q = new URLSearchParams(location.search); const bz = q.get('bz');
+  if (bz && /^[0-9a-f-]{16,80}$/i.test(bz)) setTimeout(() => open(bz), 1200);
+})();

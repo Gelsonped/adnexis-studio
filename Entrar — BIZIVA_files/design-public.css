@@ -1,0 +1,43 @@
+/* Biziva design 2026-10-12 — páginas públicas, acesso e idiomas (PT/EN/ES). Só apresentação. */
+:root{--bvp-bg:#0d0d10;--bvp-surface:#15161b;--bvp-line:#303139;--bvp-field:#666874;--bvp-text:#f5efdf;--bvp-muted:#aba9b3;--bvp-primary:#cc1432;--bvp-brand:#e71c3c;--bvp-focus:#f28a9a}
+body{background:var(--bvp-bg);color:var(--bvp-text)}
+:is(a,button,input,select,textarea,summary):focus-visible{outline:2px solid var(--bvp-focus);outline-offset:3px}
+:is(.auth-submit,.signup-cta,.button.primary,a.button.primary,.public-hero .button:first-of-type,.auth-nav-cta){background:var(--bvp-primary)!important;border-color:var(--bvp-primary)!important;color:#fff7ea!important;min-height:44px}
+.auth-page input:where(:not([type=checkbox]):not([type=radio])){border:1px solid var(--bvp-field)!important;background:#101115!important;color:var(--bvp-text)!important;font-size:16px!important;min-height:46px;border-radius:10px}
+.auth-tabs{border:1px solid var(--bvp-line);border-radius:12px}
+.auth-error{background:#e71c3c14;border:1px solid #e71c3c55;color:#ffd0d6;border-radius:12px}
+:is(.info-card,.feature-card){background:var(--bvp-surface)!important;border:1px solid var(--bvp-line)!important;border-radius:18px!important;box-shadow:none!important}
+:is(.public-section,.section){border-color:var(--bvp-line)}
+:is(.public-section,.info-card,.feature-card) p{color:var(--bvp-muted)}
+.lang-switch a[aria-current],.lang-switch .active{color:var(--bvp-text);border-color:var(--bvp-brand)}
+.public-notice{border:1px solid var(--bvp-line);background:var(--bvp-surface);border-radius:12px}
+@media(max-width:700px){.public-hero h1,.auth-display{font-size:clamp(32px,9vw,42px)}}
+body:has(.public-hero) :is(.public-notice,section.closing,.public-menu,nav){background:var(--bvp-surface)!important;color:var(--bvp-text)!important;border-color:var(--bvp-line)!important}body:has(.public-hero) .lang-notice{background:#dfbf8114!important;border:1px solid #dfbf8155!important;color:#f1dcae!important}body:has(.public-hero) :is(.public-notice,.closing) :is(p,li,small){color:var(--bvp-muted)!important}body:has(.public-hero) :is(h1,h2,h3,strong){color:var(--bvp-text)}body:has(.public-hero) p{color:var(--bvp-muted)}body:has(.public-hero) .site-header{background:#0d0d10e6!important;border-color:var(--bvp-line)!important}body:has(.public-hero) .site-header :is(button,a){color:var(--bvp-text)}body:has(.public-hero) .site-header button span{background:var(--bvp-text)!important}:root{--bvp-muted:#b8b6c0;--bvp-field:#777986}
+body :is(.public-hero,.info-card,.feature-card,.legal-page,.public-section) p{color:var(--bvp-muted,#b8b6c0)!important;line-height:1.65}
+body .public-hero{padding-block:44px 28px!important}
+body .public-hero h1{font-size:clamp(32px,4.5vw,54px)!important;line-height:1.12!important;margin-bottom:20px}
+body :is(.public-hero,.public-section) .public-notice{margin:20px auto!important}
+body :is(.pricing-grid,.plans-grid):has(> :only-child){grid-template-columns:minmax(0,560px)!important;justify-content:center}
+body :is(input,textarea,select):not([type=checkbox]):not([type=radio]){font-size:16px;max-width:100%;box-sizing:border-box}
+body :is(a,button,input,select,textarea,summary):focus-visible{outline:2px solid var(--bvp-focus,#f28a9a)!important;outline-offset:3px!important}
+body .auth-tabs button,body .auth-submit,body summary{min-height:44px}
+body .bz-use-prompt{display:inline-flex;min-height:44px;align-items:center;color:var(--bvp-text,#f5efdf);text-decoration:underline}
+@media(max-width:700px){
+ body .public-hero{padding:28px 18px 20px!important}
+ body .public-hero h1{font-size:34px!important;line-height:1.15!important}
+ body .public-hero p{font-size:16px!important}
+ body .auth-promo{display:none!important}
+ body .auth-page{padding-top:20px!important;gap:20px!important}
+ body .public-notice{font-size:13px;line-height:1.5;padding:14px!important}
+ body .auth-form{padding:20px!important}
+ body .auth-hero{display:none!important}
+ body .auth-layout{grid-template-columns:minmax(0,1fr)!important;padding-top:16px!important}
+ body.cinema-landing .hero{padding-top:24px!important;min-height:0!important}
+ body.cinema-landing .hero-grid{display:flex!important;flex-direction:column!important;gap:20px!important}
+ body.cinema-landing .hero-copy{order:0!important;padding-top:0!important}
+ body.cinema-landing .neural-scene{order:1!important;height:140px!important;min-height:0!important;margin:0!important}
+ body.cinema-landing .hero-demo{margin-block:20px!important}
+ body.cinema-landing .hero-copy h1{font-size:36px!important;line-height:1.14!important}
+}
+
+@media(max-width:700px){body.cinema-landing .hero-copy{display:flex!important;flex-direction:column!important}body.cinema-landing .hero-copy .hero-actions{order:2!important}body.cinema-landing .hero-copy .hero-demo{order:3!important}body.cinema-landing .hero-copy .hero-footnote{order:4!important}body.cinema-landing .hero-copy .public-notice{order:5!important}}

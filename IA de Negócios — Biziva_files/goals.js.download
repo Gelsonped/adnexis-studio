@@ -1,0 +1,704 @@
+(function () {
+  if (window.__bzGoals) return;
+  window.__bzGoals = 1;
+
+  var CSS = [
+    "#bz-goals{max-width:1120px;margin:0 auto;padding:20px 24px 72px;color:var(--bv-text);font-family:'DM Sans',system-ui,-apple-system,sans-serif}",
+    "@media(max-width:720px){#bz-goals{padding:14px 14px 56px}}",
+    "#bz-goals *{box-sizing:border-box;min-width:0;overflow-wrap:anywhere}",
+    "#bz-goals .bz-g-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:8px}",
+    "#bz-goals h1{font-family:Manrope,system-ui,sans-serif;font-size:clamp(28px,3vw,34px);font-weight:700;margin:0;letter-spacing:-.02em;color:var(--bv-text)}",
+    "#bz-goals .bz-g-sub{color:var(--bv-muted);font-size:14px;line-height:1.45;margin:8px 0 0;max-width:46rem}",
+    "#bz-goals .bz-g-tools{display:flex;gap:12px;align-items:end;flex-wrap:wrap}",
+    "#bz-goals label.bz-g-field{display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bv-muted)}",
+    "#bz-goals :is(input,select){background:#0b0b0e;color:var(--bv-text);border:1px solid var(--bv-field-line,#666874);border-radius:10px;padding:9px 12px;font:inherit;min-height:44px;min-width:0}",
+    "#bz-goals input[type=date]{color-scheme:dark;width:11.2rem}",
+    "#bz-goals .bz-g-money{width:10.5rem;font-variant-numeric:tabular-nums}",
+    "#bz-goals .bz-g-sec{margin-top:20px}",
+    "#bz-goals .bz-g-sec>h2{font-family:Manrope,system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-muted);font-weight:700;margin:0 0 14px}",
+    "#bz-goals .rd-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}@media(max-width:1100px){#bz-goals .rd-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){#bz-goals .rd-kpis{grid-template-columns:1fr}}",
+    "#bz-goals .rd-kpi{background:var(--bv-surface,#15161b);border:1px solid var(--bv-line,#303139);border-radius:18px;padding:14px 16px;min-width:0}",
+    "#bz-goals .rd-kpi small{display:block;line-height:1.35;color:var(--bv-muted);font-size:12.5px}",
+    "#bz-goals .rd-kpi strong{display:block;margin-top:8px;font-family:Manrope,system-ui,sans-serif;font-size:clamp(22px,2vw,28px);line-height:1.15;font-weight:700;font-variant-numeric:tabular-nums;color:var(--bv-text)}",
+    "#bz-goals .rd-kpi .bz-g-note{display:block;margin-top:8px;color:var(--bv-muted);font-size:12px;min-height:0}",
+    "#bz-goals .rd-kpi.bz-g-pos strong{color:#7ee0a4}",
+    "#bz-goals .rd-kpi.bz-g-neg strong{color:#ff8b99}",
+    "#bz-goals .rd-kpi.bz-g-edit{display:flex;flex-direction:column}",
+    "#bz-goals .rd-kpi.bz-g-edit .bz-g-inline{display:flex;align-items:center;gap:8px;margin-top:8px}",
+    "#bz-goals .rd-kpi.bz-g-edit input{width:100%;font-family:Manrope,system-ui,sans-serif;font-size:22px;font-weight:700;padding:6px 10px}",
+    "#bz-goals .bz-g-card{background:var(--bv-surface,#15161b);border:1px solid var(--bv-line,#303139);border-radius:18px;padding:18px}",
+    "#bz-goals .bz-g-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}",
+    "#bz-goals .bz-g-metric{background:transparent;border:0;padding:0}",
+    "#bz-goals .bz-g-metric small{display:block;color:var(--bv-muted);font-size:13px}",
+    "#bz-goals .bz-g-metric strong{display:block;margin-top:6px;font-family:Manrope,system-ui,sans-serif;font-size:26px;font-variant-numeric:tabular-nums}",
+    "#bz-goals .bz-g-metric p{margin:8px 0 0;color:var(--bv-muted);font-size:13px;line-height:1.45}",
+    "#bz-goals .bz-g-alert{border-color:#ff6b8055;background:#ff6b8014}",
+    "#bz-goals .bz-g-alert strong{color:#ff8b99}",
+    "#bz-goals .bz-g-ok{border-color:#5fd08a44;background:#5fd08a14}",
+    "#bz-goals .bz-g-progress{display:flex;flex-direction:column;gap:10px}",
+    "#bz-goals .bz-g-bar{height:10px;border-radius:999px;background:#f5efdf14;overflow:hidden}",
+    "#bz-goals .bz-g-bar>i{display:block;height:100%;border-radius:999px;background:var(--bv-brand,#e71c3c);width:0;transition:width .35s ease}",
+    "#bz-goals .bz-g-pace{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--bv-muted)}",
+    "#bz-goals .bz-g-pace b{color:var(--bv-text);font-weight:650}",
+    "#bz-goals .pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:#f5efdf14;color:var(--bv-muted);white-space:nowrap}",
+    "#bz-goals .pill.ok{background:#5fd08a1f;color:#5fd08a}",
+    "#bz-goals .pill.w{background:#f0b35a1f;color:#f0b35a}",
+    "#bz-goals .pill.bad{background:#ff6b801f;color:#ff6b80}",
+    "#bz-goals .bz-g-tip{font-size:15px;line-height:1.55;margin:0;color:var(--bv-text)}",
+    "#bz-goals .bz-g-chart{height:220px;width:100%}",
+    "#bz-goals .bz-g-chart svg{width:100%;height:220px;display:block}",
+    "#bz-goals .bz-g-legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 0;font-size:12px;color:var(--bv-muted)}",
+    "#bz-goals .bz-g-legend i{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:6px;vertical-align:middle}",
+    "#bz-goals .bz-g-save{color:#7ee0a4;font-size:12px;min-height:1em}",
+    "#bz-goals .bz-g-err{color:#ff8b99}",
+    "#bz-goals .bz-g-empty{color:var(--bv-muted);font-size:14px;line-height:1.5;margin:0}",
+    "#bz-goals .bz-g-banner{margin:0 0 14px;padding:8px 12px;border-radius:12px;background:#f0b35a1f;color:#f0b35a;font-size:13px}",
+    "#bz-goals .bz-g-rec h3{font-family:Manrope,system-ui,sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--bv-muted);font-weight:700;margin:0 0 6px}",
+    "#bz-goals .bz-g-rec .bz-g-big{display:block;font-family:Manrope,system-ui,sans-serif;font-size:clamp(28px,3vw,36px);margin:4px 0 10px;font-variant-numeric:tabular-nums}",
+    "#bz-goals .bz-g-rec p{margin:0;color:var(--bv-muted);font-size:13px;line-height:1.45}",
+    "#bz-goals .bz-g-rec .bz-g-extra{margin-top:12px;padding-top:12px;border-top:1px solid var(--bv-line,#303139);font-size:13px;color:var(--bv-text);line-height:1.45}",
+    "#bz-goals .bz-g-live-cap{margin:10px 0 0;color:#ff8b99;font-size:12px;line-height:1.45}",
+    "#bz-goals .bz-g-sim input[type=range]{width:100%;accent-color:var(--bv-brand,#e71c3c);height:28px}",
+    "#bz-goals .bz-g-sim-row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px}",
+    "#bz-goals .bz-g-sim-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}@media(max-width:800px){#bz-goals .bz-g-sim-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}",
+    "#bz-goals .bz-g-sim-kpis div{background:#0b0b0e;border:1px solid var(--bv-line,#303139);border-radius:12px;padding:12px}",
+    "#bz-goals .bz-g-sim-kpis small{display:block;color:var(--bv-muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}",
+    "#bz-goals .bz-g-sim-kpis strong{display:block;margin-top:4px;font-family:Manrope,system-ui,sans-serif;font-size:18px;font-variant-numeric:tabular-nums}",
+    "#bz-goals .bz-g-assume{margin:10px 0 0;font-size:11px;line-height:1.45;color:var(--bv-muted)}",
+    "#bz-goals .bz-g-funnel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}@media(max-width:700px){#bz-goals .bz-g-funnel{grid-template-columns:repeat(2,minmax(0,1fr))}}",
+    "#bz-goals .bz-g-step{text-align:center;padding:14px 10px}",
+    "#bz-goals .bz-g-step.leak{border-color:#ff6b8055;background:#ff6b8014}",
+    "#bz-goals .bz-g-step b{display:block;font-family:Manrope,system-ui,sans-serif;font-size:26px;font-variant-numeric:tabular-nums}",
+    "#bz-goals .bz-g-step span{display:block;margin-top:4px;color:var(--bv-muted);font-size:12px}",
+    "#bz-goals .bz-g-step em{display:block;margin-top:8px;font-style:normal;font-size:12px;color:#f0b35a}",
+    "#bz-goals .bz-g-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}",
+    "#bz-goals .bz-g-check li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bv-line,#303139)}",
+    "#bz-goals .bz-g-check li:last-child{border-bottom:0}",
+    "#bz-goals .bz-g-check input{width:18px;height:18px;margin-top:3px;accent-color:var(--bv-brand,#e71c3c);flex:none}",
+    "#bz-goals .bz-g-check label{cursor:pointer}",
+    "#bz-goals .bz-g-check small{display:block;color:var(--bv-muted);font-size:12px;margin-top:3px}",
+    "#bz-goals .bz-g-delta{font-variant-numeric:tabular-nums}",
+    "#bz-goals .bz-g-delta.up{color:#7ee0a4}",
+    "#bz-goals .bz-g-delta.down{color:#ff8b99}",
+    "#bz-goals table.bz-g-table{width:100%;border-collapse:collapse;font-size:13px}",
+    "#bz-goals table.bz-g-table th{text-align:left;color:var(--bv-muted);font-weight:500;font-size:12px;padding:8px 10px;border-bottom:1px solid var(--bv-line)}",
+    "#bz-goals table.bz-g-table td{padding:9px 10px;border-bottom:1px solid var(--bv-line);font-variant-numeric:tabular-nums}",
+    "#bz-goals table.bz-g-table td.n{text-align:right}",
+    "#bz-goals .bz-g-hist-m{display:none}",
+    "#bz-goals .bz-g-hist-m .row{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:10px 0;border-bottom:1px solid var(--bv-line,#303139);align-items:center}",
+    "#bz-goals .bz-g-hist-m .row:last-child{border-bottom:0}",
+    "#bz-goals .bz-g-hist-m b{font-family:Manrope,system-ui,sans-serif}",
+    "#bz-goals .bz-g-hist-m small{color:var(--bv-muted);font-size:12px;grid-column:1/-1}",
+    "@media(max-width:700px){#bz-goals .bz-g-hist-d{display:none}#bz-goals .bz-g-hist-m{display:block}}",
+    "html.bz-inshell-on #bz-inshell{display:block}",
+    ".bz-menu-2026 button.bz-metas.active,.bz-menu-2026 button.bz-metas[aria-current=page]{background:#f5efdf12;border-color:#f5efdf24;box-shadow:inset 3px 0 0 var(--bv-brand,#e71c3c);color:var(--bv-text)}"
+  ].join("");
+
+  var st = document.createElement("style");
+  st.setAttribute("data-bz-goals", "1");
+  st.textContent = CSS;
+  document.head.appendChild(st);
+
+  var host = null;
+  var loadSerial = 0;
+  var curDay = null;
+  var data = null;
+  var preview = false;
+  var saving = {};
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function brl(c) {
+    return (Number(c || 0) / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  }
+  function pct(r) {
+    if (r == null || !isFinite(r)) return "—";
+    return (r * 100).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+  }
+  function roas(r) {
+    if (r == null || !isFinite(r)) return "—";
+    return r.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "x";
+  }
+  function dateLabel(ymd) {
+    if (!ymd) return "";
+    var p = ymd.split("-");
+    return p[2] + "/" + p[1] + "/" + p[0];
+  }
+  function parseMoney(str) {
+    var s = String(str || "").trim().replace(/R\$\s?/i, "").replace(/\./g, "").replace(",", ".");
+    var n = Number(s);
+    if (!isFinite(n) || n < 0) return null;
+    return Math.round(n * 100);
+  }
+
+  function kpi(label, value, note, cls) {
+    return '<div class="rd-kpi ' + (cls || "") + '"><small>' + esc(label) + "</small><strong>" + esc(value) + "</strong>" + (note ? '<span class="bz-g-note">' + esc(note) + "</span>" : "") + "</div>";
+  }
+
+  function pacePill(pace) {
+    if (pace === "met") return '<span class="pill ok">Meta atingida</span>';
+    if (pace === "ahead") return '<span class="pill ok">Adiantado</span>';
+    if (pace === "behind") return '<span class="pill bad">Atrasado</span>';
+    if (pace === "on_track") return '<span class="pill w">No ritmo</span>';
+    return "";
+  }
+
+  function chartSvg(series) {
+    var w = 1000, h = 220, p = { l: 8, r: 8, t: 16, b: 28 };
+    var innerW = w - p.l - p.r, innerH = h - p.t - p.b;
+    var rows = series || [];
+    var max = 1;
+    rows.forEach(function (r) {
+      max = Math.max(max, Math.abs(r.fatCents || 0), Math.abs(r.adCents || 0), Math.abs(r.profitCents || 0));
+    });
+    function x(i) { return p.l + (rows.length <= 1 ? innerW / 2 : (i * innerW) / (rows.length - 1)); }
+    function y(v) { return p.t + innerH / 2 - ((Number(v) || 0) / max) * innerH / 2; }
+    function path(key, color) {
+      if (!rows.length) return "";
+      var d = rows.map(function (r, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(r[key] || 0).toFixed(1); }).join(" ");
+      return '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>';
+    }
+    var ticks = "";
+    rows.forEach(function (r, i) {
+      if (i % 5 !== 0 && i !== rows.length - 1) return;
+      var parts = String(r.day).split("-");
+      ticks += '<text x="' + x(i).toFixed(1) + '" y="' + (h - 8) + '" text-anchor="middle" fill="#aba9b3" font-size="11" font-family="DM Sans,system-ui">' + esc(parts[2] + "/" + parts[1]) + "</text>";
+    });
+    var area = "";
+    if (rows.length) {
+      var d = rows.map(function (r, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(r.fatCents || 0).toFixed(1); }).join(" ");
+      d += " L" + x(rows.length - 1).toFixed(1) + " " + y(0).toFixed(1) + " L" + x(0).toFixed(1) + " " + y(0).toFixed(1) + " Z";
+      area = '<path d="' + d + '" fill="rgba(245,239,223,.08)"/>';
+    }
+    return '<svg viewBox="0 0 ' + w + " " + h + '" role="img" aria-label="Gráfico dos últimos 30 dias">' + area + path("fatCents", "#f5efdf") + path("adCents", "#e71c3c") + path("profitCents", "#5fd08a") + ticks + "</svg>";
+  }
+
+  var DIM_F = 1.5, DIM_K = 0.4;
+
+  function effectiveCpa(spend, cpa0, avg) {
+    spend = Math.max(0, Math.round(spend || 0));
+    cpa0 = Math.max(0, Math.round(cpa0 || 0));
+    avg = Math.max(0, Number(avg) || 0);
+    if (cpa0 <= 0) return null;
+    if (avg <= 0 || spend <= DIM_F * avg) return cpa0;
+    return Math.max(cpa0, cpa0 * (1 + DIM_K * (spend / (DIM_F * avg) - 1)));
+  }
+
+  function simulateLive(spend, s) {
+    var sim = (s.plan && s.plan.simulator) || {};
+    var ticket = sim.ticketCents || 0, iaU = sim.iaPerSaleCents || 0, cpa0 = sim.cpaCents || 0, avg = sim.avgDailyAds7 || 0;
+    var cpa = effectiveCpa(spend, cpa0, avg);
+    var cap = cpa0 > 0 && avg > 0 && ((ticket - iaU - cpa0) <= 0 || (cpa != null && (ticket - iaU - cpa) <= 0));
+    var sales = cpa && spend > 0 ? spend / cpa : 0;
+    var fat = Math.round(sales * ticket);
+    var ia = Math.round(sales * iaU);
+    var profit = fat - spend - ia;
+    var monthWithoutToday = (s.goal && s.goal.monthProfitCents || 0) - (s.daily && s.daily.profitCents || 0);
+    var future = Math.max(0, ((s.goal && s.goal.daysRemaining) || 1) - 1);
+    var projected = Math.round(monthWithoutToday + profit + (sim.avgDailyProfit7 || 0) * future);
+    return { spend: spend, cpa: cpa, sales: sales, fat: fat, ia: ia, profit: profit, projected: projected, cap: cap };
+  }
+
+  function salesLabel(n) {
+    var x = Number(n) || 0;
+    if (Math.abs(x - Math.round(x)) < 0.05) return String(Math.round(x));
+    return x.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+
+  function deltaHtml(m, isPct) {
+    if (!m) return "—";
+    var d = m.delta, cls = d > 0 ? "up" : d < 0 ? "down" : "";
+    var arrow = d > 0 ? "▲ " : d < 0 ? "▼ " : "";
+    var body;
+    if (isPct) {
+      var pts = (d * 100);
+      body = (pts >= 0 ? "+" : "") + pts.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " p.p.";
+    } else if (m.pct == null && m.prev === 0 && m.now !== 0) {
+      body = "novo";
+    } else {
+      var p = m.pct == null ? "" : " (" + (m.pct >= 0 ? "+" : "") + (m.pct * 100).toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + "%)";
+      body = (d >= 0 ? "+" : "") + (isPct ? "" : "") + (arguments[2] === "money" ? brl(d) : String(d)) + p;
+    }
+    if (arguments[2] === "money" && !isPct) {
+      var p2 = m.pct == null ? (m.prev === 0 && m.now !== 0 ? " (novo)" : "") : " (" + (m.pct >= 0 ? "+" : "") + (m.pct * 100).toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + "%)";
+      body = (d >= 0 ? "+" : "−") + brl(Math.abs(d)) + p2;
+    }
+    return '<span class="bz-g-delta ' + cls + '">' + arrow + esc(body) + "</span>";
+  }
+
+  function simKpis(v) {
+    return '<div class="bz-g-sim-kpis">' +
+      "<div><small>Vendas previstas</small><strong>" + salesLabel(v.sales) + "</strong></div>" +
+      "<div><small>Faturamento</small><strong>" + brl(v.fat) + "</strong></div>" +
+      "<div><small>Custo com IA</small><strong>" + brl(v.ia) + "</strong></div>" +
+      "<div><small>Lucro do dia</small><strong>" + brl(v.profit) + "</strong></div>" +
+      "<div><small>Projeção do mês</small><strong>" + brl(v.projected) + "</strong></div>" +
+      "</div>";
+  }
+
+  function recKpis(r) {
+    return '<div class="bz-g-sim-kpis">' +
+      "<div><small>Vendas previstas</small><strong>" + salesLabel(r.sales) + "</strong></div>" +
+      "<div><small>Faturamento previsto</small><strong>" + brl(r.fatCents != null ? r.fatCents : r.fat) + "</strong></div>" +
+      "<div><small>Lucro previsto do dia</small><strong>" + brl(r.profitCents != null ? r.profitCents : r.profit) + "</strong></div>" +
+      "<div><small>Projeção do mês</small><strong>" + brl(r.projectedCents != null ? r.projectedCents : r.projected) + "</strong></div>" +
+      "</div>";
+  }
+
+  function recCard(s) {
+    var r = (s.plan && s.plan.recommended) || {};
+    if (r.kind === "no_history" || r.kind === "no_ads_history" || r.kind === "no_goal") {
+      return '<div class="bz-g-card bz-g-rec" style="margin-top:14px"><h3>Investimento recomendado hoje</h3><p>' + esc(r.note || "Preencha a meta e aguarde vendas nos últimos 7 dias para calcular o investimento.") + "</p></div>";
+    }
+    var extra = "";
+    if (r.extra && (r.extra.extraProfitCents || 0) > 0) {
+      extra = '<p class="bz-g-extra">Se investir ' + brl(r.extra.spendCents) + "/dia, o lucro do dia sobe " + brl(r.extra.extraProfitCents) + " (projeção do mês " + brl(r.extra.projectedCents) + ").</p>";
+    }
+    var cls = r.kind === "cap" ? " bz-g-alert" : (r.kind === "goal_met" ? " bz-g-ok" : "");
+    return '<div class="bz-g-card bz-g-rec' + cls + '" style="margin-top:14px"><h3>Investimento recomendado hoje</h3>' +
+      '<strong class="bz-g-big">' + brl(r.spendCents || 0) + "/dia</strong>" +
+      "<p>" + esc(r.note || "Valor diário em anúncios para o plano de lucro.") + "</p>" +
+      recKpis(r) + extra + "</div>";
+  }
+
+  function capAlertHtml(plan, live) {
+    var msg = plan.capMessage;
+    var sim = plan.simulator || {};
+    var show = sim.cpaCents > 0 && sim.avgDailyAds7 > 0 && (plan.capAlert || (live && live.cap));
+    if (!show) return "";
+    if (live && live.cap && !plan.capAlert && plan.capCeilingCents != null) {
+      msg = "Acima de " + brl(plan.capCeilingCents) + " não compensa investir mais: o CPA projetado zera a margem.";
+    }
+    if (!msg) msg = "O CPA projetado zera a margem. Não compensa investir mais em anúncio neste ponto.";
+    var tag = live && live.cap && !plan.capAlert ? "p" : "div";
+    if (live && live.cap && !plan.capAlert) {
+      return '<p class="bz-g-live-cap" id="bz-g-sim-cap">' + esc(msg) + "</p>";
+    }
+    return '<div class="bz-g-card bz-g-alert" style="margin-top:14px" id="bz-g-sim-cap"><strong>Teto do investimento</strong><p class="bz-g-empty" style="margin-top:8px">' + esc(msg) + "</p></div>";
+  }
+
+  function planBlock(s) {
+    var plan = s.plan || {};
+    var phrase = (plan.phrase && plan.phrase.text) || "Preencha a meta mensal para montarmos o plano do dia.";
+    var rec = plan.recommended || {};
+    var sim = plan.simulator || {};
+    if (!(sim.cpaCents > 0 && sim.avgDailyAds7 > 0)) {
+      var note = "Registre o investimento diário em anúncios para calcularmos a recomendação e o teto de investimento.";
+      if (!(s.last7 && s.last7.sales > 0)) note += " Também precisamos de vendas confirmadas nos últimos 7 dias.";
+      return '<div class="bz-g-card"><p class="bz-g-tip">' + esc(phrase) + '</p></div><div class="bz-g-card bz-g-rec" style="margin-top:14px"><h3>Investimento recomendado hoje</h3><p>' + esc(note) + "</p></div>";
+    }
+    var start = rec.spendCents != null ? rec.spendCents : (s.daily && s.daily.adCents || 0);
+    var ceil = rec.ceilingCents != null ? rec.ceilingCents : 0;
+    var max = Math.max(start, Math.round((sim.avgDailyAds7 || 0) * 5), ceil, 50000);
+    var live = simulateLive(start, s);
+    return '<div class="bz-g-card' + (plan.phrase && plan.phrase.kind === "met" ? " bz-g-ok" : "") + '"><p class="bz-g-tip">' + esc(phrase) + "</p></div>" +
+      recCard(s) +
+      capAlertHtml(plan, { cap: plan.capAlert }) +
+      '<div class="bz-g-card bz-g-sim" style="margin-top:14px"><div class="bz-g-sim-row"><strong>Simulador de investimento diário</strong><label class="bz-g-field" style="margin:0">Valor<input class="bz-g-money" id="bz-g-sim-in" inputmode="decimal" value="' + esc((start / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })) + '"></label></div>' +
+      '<input type="range" id="bz-g-sim-range" min="0" max="' + max + '" step="100" value="' + start + '" aria-label="Investimento diário em anúncios">' +
+      '<div id="bz-g-sim-out">' + simKpis(live) + (live.cap && !plan.capAlert ? capAlertHtml(plan, live) : "") + "</div>" +
+      '<p class="bz-g-assume">' + esc(sim.assumption || "Se o investimento do dia passar de 1,5× a média diária dos últimos 7 dias, o CPA sobe 40% da parcela excedente (rendimento decrescente simples). Não é uma previsão de plataforma de anúncios.") + "</p></div>";
+  }
+
+  function checklistBlock(s) {
+    var items = s.checklist || [];
+    var day = s.day || "";
+    var html = '<ul class="bz-g-check">';
+    items.forEach(function (it) {
+      var key = "bz_goals_check_v3_" + day + "_" + it.id;
+      var on = false;
+      try { on = localStorage.getItem(key) === "1"; } catch (e) {}
+      html += '<li><input type="checkbox" id="ck-' + esc(it.id) + '" data-ck="' + esc(key) + '"' + (on ? " checked" : "") + '><label for="ck-' + esc(it.id) + '"><b>' + esc(it.title) + "</b><small>" + esc(it.hint) + "</small></label></li>";
+    });
+    return html + "</ul>";
+  }
+
+  function funnelBlock(fn, title) {
+    if (!fn) return "";
+    var labels = { arrived: "Chegou", catalog: "Viu catálogo", photo: "Mandou foto", paid: "Pagou" };
+    var keys = ["arrived", "catalog", "photo", "paid"];
+    var leakTo = fn.leakStage && fn.leakStage.stage;
+    var html = '<p class="bz-g-empty" style="margin:0 0 10px">' + esc(title) + "</p><div class=\"bz-g-funnel\">";
+    keys.forEach(function (k, i) {
+      var tr = i ? (fn.transitions || [])[i - 1] : null;
+      var rate = tr && tr.rate != null ? pct(tr.rate) + " da etapa anterior" : "Base do funil";
+      var leak = k === leakTo ? " leak" : "";
+      var leakLbl = k === leakTo ? "<em>Maior perda</em>" : "";
+      html += '<div class="bz-g-card bz-g-step' + leak + '"><b>' + esc(String(fn[k] || 0)) + "</b><span>" + labels[k] + "</span><span>" + rate + "</span>" + leakLbl + "</div>";
+    });
+    return html + "</div>";
+  }
+
+  function weekBlock(s) {
+    var w = s.week || {};
+    function row(label, m, kind) {
+      var now = kind === "money" ? brl(m && m.now) : kind === "pct" ? pct(m && m.now) : String((m && m.now) || 0);
+      return "<tr><td>" + esc(label) + '</td><td class="n">' + now + '</td><td class="n">' + deltaHtml(m, kind === "pct", kind) + "</td></tr>";
+    }
+    function table(title, pack) {
+      pack = pack || {};
+      return '<div class="bz-g-card"><p class="bz-g-empty" style="margin:0 0 8px">' + esc(title) + '</p><table class="bz-g-table"><thead><tr><th>Indicador</th><th class="n">Agora</th><th class="n">vs período anterior</th></tr></thead><tbody>' +
+        row("Faturamento", pack.fat, "money") +
+        row("Lucro líquido", pack.profit, "money") +
+        row("Vendas", pack.sales, "num") +
+        row("Conversão", pack.conversion, "pct") +
+        "</tbody></table></div>";
+    }
+    return '<div class="bz-g-grid">' + table("Mesmo dia da semana passada", w.sameWeekday) + table("Últimos 7 dias vs 7 dias anteriores", w.last7vsPrev7) + "</div>";
+  }
+
+  function historyBlock(s) {
+    var rows = s.history || [];
+    if (!rows.length) return '<p class="bz-g-empty">Ainda não há meses anteriores com resultado calculado.</p>';
+    var table = '<table class="bz-g-table"><thead><tr><th>Mês</th><th class="n">Meta</th><th class="n">Resultado</th><th>Situação</th></tr></thead><tbody>';
+    var mobile = '<div class="bz-g-hist-m">';
+    rows.forEach(function (r) {
+      var m = String(r.month || "").split("-");
+      var label = m.length === 2 ? m[1] + "/" + m[0] : r.month;
+      var current = s.goal && s.goal.month;
+      var inProgress = current && r.month === current && r.hasGoal && !r.met;
+      var pill = !r.hasGoal ? '<span class="pill">Sem meta</span>' : inProgress ? '<span class="pill w">Em andamento</span>' : r.met ? '<span class="pill ok">Bateu</span>' : '<span class="pill bad">Não bateu</span>';
+      var meta = r.hasGoal ? brl(r.salaryGoalCents) : "—";
+      table += "<tr><td>" + esc(label) + '</td><td class="n">' + meta + '</td><td class="n">' + brl(r.profitCents) + "</td><td>" + pill + "</td></tr>";
+      mobile += '<div class="row"><b>' + esc(label) + "</b>" + pill + "<small>Meta " + meta + " · Resultado " + brl(r.profitCents) + "</small></div>";
+    });
+    return '<div class="bz-g-card">' + '<div class="bz-g-hist-d" style="overflow-x:auto">' + table + "</tbody></table></div>" + mobile + "</div></div>";
+  }
+
+  function render() {
+    if (!host) return;
+    if (!data) {
+      host.innerHTML = '<div id="bz-goals"><p class="bz-g-empty">Carregando a meta…</p></div>';
+      return;
+    }
+    var d = data.daily;
+    var g = data.goal;
+    var p = data.progress || {};
+    var x = data.extras || {};
+    var profitCls = (d.profitCents || 0) >= 0 ? "bz-g-pos" : "bz-g-neg";
+    var adsVal = (Number(d.adCents || 0) / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var goalVal = (Number(g.salaryGoalCents || 0) / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var width = Math.round((p.pct || 0) * 1000) / 10;
+    var banner = "";
+    var html = '<div id="bz-goals">' + banner +
+      '<div class="bz-g-head"><div><h1>Meta</h1><p class="bz-g-sub">Faturamento, anúncios, lucro líquido e o plano do dia para a meta mensal de salário.</p></div>' +
+      '<div class="bz-g-tools">' +
+        '<label class="bz-g-field">Dia<input type="date" id="bz-g-day" lang="pt-BR" value="' + esc(data.day) + '" max="' + esc(data.dayMax || data.day) + '"></label>' +
+        '<label class="bz-g-field">Meta mensal de salário<input class="bz-g-money" id="bz-g-salary" inputmode="decimal" value="' + esc(goalVal) + '" aria-label="Meta mensal de salário"><span id="bz-g-goal-msg" role="status"></span></label>' +
+      "</div></div>" +
+      '<div class="bz-g-sec"><div class="bz-g-card bz-g-progress">' +
+        '<div class="bz-g-pace"><span>Progresso do mês ' + esc((function(){var m=String(g.month||"").split("-");return m.length===2?(m[1]+"/"+m[0]):"";})()) + " " + pacePill(p.pace) + "</span><span><b>" + brl(g.monthProfitCents) + "</b> de " + (g.hasGoal ? brl(g.salaryGoalCents) : "—") + "</span></div>" +
+        '<div class="bz-g-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round((p.pct || 0) * 100) + '"><i style="width:' + width + '%"></i></div>' +
+        '<div class="bz-g-pace"><span>' + (p.pace === "no_goal" ? "Defina a meta mensal para ver se o mês está adiantado ou atrasado." : (p.pace === "met" ? "Meta de lucro do mês concluída." : "Ritmo linear esperado até hoje: " + brl(p.expectedCents) + (p.deltaCents >= 0 ? " · +" : " · ") + brl(p.deltaCents))) + "</span><span>" + esc(String(g.daysRemaining || "—")) + " dia" + (g.daysRemaining === 1 ? "" : "s") + " restante" + (g.daysRemaining === 1 ? "" : "s") + " no mês</span></div>" +
+      "</div></div>" +
+      '<div class="bz-g-sec"><h2>Resumo diário</h2><div class="rd-kpis">' +
+        kpi("Valor de faturamento", brl(d.fatCents), "Vendas confirmadas no Pix do vendedor") +
+        '<div class="rd-kpi bz-g-edit"><small>Investimento em Anúncios</small><div class="bz-g-inline"><input class="bz-g-money" id="bz-g-ads" inputmode="decimal" value="' + esc(adsVal) + '" aria-label="Investimento em anúncios do dia"></div><span class="bz-g-note bz-g-save" id="bz-g-ads-msg">Você preenche o valor investido no dia</span></div>' +
+        kpi("Lucro Líquido", brl(d.profitCents), "Faturamento − anúncios − custo com IA", profitCls) +
+        kpi("Clientes atendidos", String(d.customers || 0), "Conversas com mensagem do cliente") +
+        kpi("Vendas realizadas", String(d.sales || 0), "Pedidos pagos confirmados") +
+        kpi("Margem de conversão", pct(d.conversion), "Vendas / clientes atendidos") +
+        kpi("Custo com IA", brl(d.iaCents), "Gasto da carteira de API no dia") +
+        kpi("Meta do Dia", g.hasGoal ? brl(g.dailyGoalCents) : "—", !g.hasGoal ? "Defina a meta mensal para calcular" : g.met ? "Meta do mês já atingida" : "Lucro líquido necessário hoje") +
+      "</div></div>" +
+      '<div class="bz-g-sec"><h2>Plano do dia</h2>' + planBlock(data) + "</div>" +
+      '<div class="bz-g-sec"><h2>Tarefas do dia</h2><div class="bz-g-card">' + checklistBlock(data) + "</div></div>" +
+      '<div class="bz-g-sec"><h2>Funil do cliente</h2>' + funnelBlock(data.funnel && data.funnel.day, "Hoje") + '<div style="height:12px"></div>' + funnelBlock(data.funnel && data.funnel.last7, "Últimos 7 dias") +
+        '<p class="bz-g-assume">Chegou = conversas com mensagem do cliente. Viu catálogo e mandou foto são aproximações (estado v2 / pedidos do período, não uma coorte estrita). Pagou = vendas confirmadas no Pix do vendedor.</p></div>' +
+      '<div class="bz-g-sec"><h2>Comparação com a semana passada</h2>' + weekBlock(data) + "</div>" +
+      '<div class="bz-g-sec"><h2>Últimos 30 dias</h2><div class="bz-g-card"><div class="bz-g-chart">' + chartSvg(data.series30) + "</div>" +
+        '<div class="bz-g-legend"><span><i style="background:#f5efdf"></i>Faturamento</span><span><i style="background:#e71c3c"></i>Anúncios</span><span><i style="background:#5fd08a"></i>Lucro líquido</span></div></div></div>' +
+      '<div class="bz-g-sec"><h2>Histórico de metas</h2>' + historyBlock(data) + "</div>" +
+      '<div class="bz-g-sec"><h2>Indicadores e dica</h2><div class="bz-g-grid">' +
+        '<div class="bz-g-card bz-g-metric"><small>ROAS do dia</small><strong>' + roas(x.roas) + "</strong><p>Faturamento dividido pelo investimento em anúncios.</p></div>" +
+        '<div class="bz-g-card bz-g-metric"><small>Ticket médio</small><strong>' + (x.ticketCents == null ? "—" : brl(x.ticketCents)) + "</strong><p>Faturamento do dia / vendas realizadas.</p></div>" +
+        '<div class="bz-g-card bz-g-metric"><small>CPA</small><strong>' + (x.cpaCents == null ? "—" : brl(x.cpaCents)) + "</strong><p>Anúncios do dia / vendas realizadas.</p></div>" +
+        '<div class="bz-g-card bz-g-metric"><small>Custo por cliente</small><strong>' + (x.costPerCustomerCents == null ? "—" : brl(x.costPerCustomerCents)) + "</strong><p>Anúncios do dia / clientes atendidos.</p></div>" +
+      "</div><div class=\"bz-g-card\" style=\"margin-top:14px\"><p class=\"bz-g-tip\">" + esc(x.tip || "") + "</p></div></div></div>";
+
+    host.innerHTML = html;
+    bind();
+  }
+
+  function bind() {
+    var dayEl = host.querySelector("#bz-g-day");
+    if (dayEl) dayEl.addEventListener("change", function () {
+      if (dayEl.value && dayEl.value !== curDay) openDay(dayEl.value);
+    });
+    var ads = host.querySelector("#bz-g-ads");
+    if (ads) {
+      ads.addEventListener("blur", function () { saveAds(ads); });
+      ads.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); ads.blur(); } });
+    }
+    var sal = host.querySelector("#bz-g-salary");
+    if (sal) {
+      sal.addEventListener("blur", function () { saveGoal(sal); });
+      sal.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); sal.blur(); } });
+    }
+    var range = host.querySelector("#bz-g-sim-range");
+    var simIn = host.querySelector("#bz-g-sim-in");
+    var simOut = host.querySelector("#bz-g-sim-out");
+    function applySim(cents, fromRange) {
+      cents = Math.max(0, Math.round(Number(cents) || 0));
+      if (range && fromRange !== "range") range.value = String(cents);
+      if (simIn && fromRange !== "input") simIn.value = (cents / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (simOut) {
+        var live = simulateLive(cents, data);
+        var plan = data && data.plan || {};
+        simOut.innerHTML = simKpis(live) + (live.cap && !plan.capAlert ? capAlertHtml(plan, live) : "");
+      }
+    }
+    if (range) range.addEventListener("input", function () { applySim(range.value, "range"); });
+    if (simIn) {
+      simIn.addEventListener("input", function () {
+        var c = parseMoney(simIn.value);
+        if (c != null && range) range.value = String(c);
+        if (c != null) applySim(c, "input");
+      });
+      simIn.addEventListener("blur", function () {
+        var c = parseMoney(simIn.value);
+        if (c != null) applySim(c);
+      });
+    }
+    host.querySelectorAll("input[data-ck]").forEach(function (el) {
+      el.addEventListener("change", function () {
+        try { localStorage.setItem(el.getAttribute("data-ck"), el.checked ? "1" : "0"); } catch (e) {}
+      });
+    });
+  }
+
+  function saveAds(input) {
+    var cents = parseMoney(input.value);
+    var msg = host.querySelector("#bz-g-ads-msg");
+    if (cents == null) { if (msg) { msg.textContent = "Valor inválido"; msg.className = "bz-g-note bz-g-err"; } return; }
+    input.value = (cents / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    put("/api/goals/ad-spend", { day: curDay, amount_cents: cents }, msg, function () { openDay(curDay, true); });
+  }
+
+  function saveGoal(input) {
+    var cents = parseMoney(input.value);
+    if (cents == null) { var msg = host.querySelector("#bz-g-goal-msg"); if (msg) msg.textContent = "Valor inválido"; return; }
+    input.value = (cents / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var month = data && data.goal && data.goal.month;
+    put("/api/goals/goal", { month: month, salary_goal_cents: cents }, host.querySelector("#bz-g-goal-msg"), function () { openDay(curDay, true); });
+  }
+
+  function put(url, body, msg, then) {
+    var key = url;
+    if (saving[key]) return;
+    saving[key] = 1;
+    if (msg) { msg.textContent = "Salvando…"; msg.className = "bz-g-note"; }
+    fetch(url, {
+      method: "PUT",
+      credentials: "same-origin",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body)
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        saving[key] = 0;
+        if (!x.ok) throw new Error(x.j && x.j.error || "falha");
+        if (msg) { msg.textContent = "Salvo"; msg.className = "bz-g-note bz-g-save"; }
+        if (then) then();
+      })
+      .catch(function () {
+        saving[key] = 0;
+        if (msg) { msg.textContent = "Não foi possível salvar. Tente de novo."; msg.className = "bz-g-note bz-g-err"; }
+      });
+  }
+
+  function reportsGroup() {
+    return document.getElementById("bz-menu-group-relatrios") ||
+      document.getElementById("bz-menu-group-relatorios") ||
+      (function () {
+        var btn = [].find.call(document.querySelectorAll(".bz-menu-heading"), function (b) { return /Relat/.test(b.textContent || ""); });
+        return btn && btn.parentElement && btn.parentElement.querySelector(".bz-menu-children");
+      })();
+  }
+
+  function openReportsGroup() {
+    var kids = reportsGroup();
+    if (!kids) return;
+    kids.removeAttribute("hidden");
+    var heading = kids.previousElementSibling;
+    if (heading && heading.hasAttribute("aria-expanded")) heading.setAttribute("aria-expanded", "true");
+    try {
+      sessionStorage.setItem("bz-menu-group-relatrios", "1");
+      sessionStorage.setItem("bz-menu-group-relatorios", "1");
+    } catch (e) {}
+  }
+
+  function iconSvg() {
+    return '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h8l6 6v12H4Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>';
+  }
+
+  function ensureMenu() {
+    if (window.__BZ_METAS !== 1) {
+      document.querySelectorAll(".bz-metas").forEach(function (b) { b.remove(); });
+      return;
+    }
+    if (document.querySelector(".bz-metas")) return;
+    var kids = reportsGroup();
+    if (!kids) return;
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "bz-metas";
+    b.setAttribute("data-bz-metas", "1");
+    b.innerHTML = iconSvg() + "<span>Metas</span>";
+    kids.appendChild(b);
+  }
+
+  function markMenu(on) {
+    document.querySelectorAll(".bz-metas").forEach(function (b) {
+      if (on) { b.classList.add("active"); b.setAttribute("aria-current", "page"); }
+      else { b.classList.remove("active"); b.removeAttribute("aria-current"); }
+    });
+  }
+
+  function setCrumb() {
+    var p = document.querySelector(".chat-top-actions");
+    if (!p) return;
+    var o = document.querySelector(".bz-crumb-x");
+    if (!o) {
+      o = document.createElement("span");
+      o.className = "rd-crumb bz-crumb-x";
+      o.innerHTML = "<span></span><i aria-hidden=\"true\">/</i><b class=\"chat-view-name\"></b>";
+      p.insertBefore(o, p.firstChild);
+    }
+    var s = o.querySelector("span");
+    var b = o.querySelector("b");
+    if (s) s.textContent = "Relatórios";
+    if (b) b.textContent = "Meta";
+  }
+
+  function getHost() {
+    var h = document.getElementById("bz-inshell");
+    if (h) return h;
+    var m = document.querySelector(".workspace-main");
+    if (!m) return null;
+    h = document.createElement("div");
+    h.id = "bz-inshell";
+    m.appendChild(h);
+    return h;
+  }
+
+  function closeView() {
+    if (!document.documentElement.classList.contains("bz-goals-on")) return;
+    document.documentElement.classList.remove("bz-goals-on", "bz-inshell-on");
+    var s = document.querySelector(".workspace-shell");
+    if (s) s.classList.remove("bz-inshell-on");
+    markMenu(false);
+    ++loadSerial;
+    host = null;
+  }
+
+  function openDay(day, silent) {
+    curDay = day;
+    var ticket = ++loadSerial;
+    data = null;
+    render();
+    fetch("/api/goals/summary?day=" + encodeURIComponent(day), { credentials: "same-origin", cache: "no-store" })
+      .then(function (r) {
+        if (r.status === 404) return r.json().then(function (j) { if (j && j.killed) { window.__BZ_METAS = 0; ensureMenu(); throw new Error("killed"); } throw new Error("fail"); });
+        if (r.status === 401) throw new Error("auth");
+        if (!r.ok) throw new Error("fail");
+        return r.json();
+      })
+      .then(function (j) {
+        if (ticket !== loadSerial || !host || !document.documentElement.classList.contains("bz-goals-on")) return;
+        data = j;
+        data.dayMax = j.dayMax || j.day;
+        render();
+      })
+      .catch(function (e) {
+        if (!host || ticket !== loadSerial) return;
+        if (String(e.message) === "killed") host.innerHTML = '<div id="bz-goals"><p class="bz-g-empty">Esta página está desligada no momento.</p></div>';
+        else host.innerHTML = '<div id="bz-goals"><p class="bz-g-empty">Não foi possível carregar a meta. Tente de novo.</p></div>';
+      });
+  }
+
+  function open(day) {
+    var h = getHost();
+    if (!h) return setTimeout(function () { open(day); }, 200);
+    host = h;
+    document.documentElement.classList.add("bz-inshell-on", "bz-goals-on");
+    var s = document.querySelector(".workspace-shell");
+    if (s) s.classList.add("bz-inshell-on");
+    document.title = "Meta — Biziva";
+    openReportsGroup();
+    markMenu(true);
+    setCrumb();
+    var want = day || (new URLSearchParams(location.search).get("day")) || "";
+    if (!preview && (!want || !/^\d{4}-\d{2}-\d{2}$/.test(want))) {
+      var now = new Date();
+      var brt = new Date(now.getTime() - 3 * 3600e3);
+      want = brt.getUTCFullYear() + "-" + String(brt.getUTCMonth() + 1).padStart(2, "0") + "-" + String(brt.getUTCDate()).padStart(2, "0");
+    }
+
+    if (!silentUrl()) {
+      var next = "/app?view=metas";
+      if (want) next += "&day=" + want;
+      if (location.pathname + location.search !== next) history.pushState({ bzView: "metas" }, "", next);
+    }
+    h.scrollTop = 0;
+    openDay(want);
+  }
+
+  function silentUrl() { return false; }
+
+  window.__bzGoalsOpen = function (target, day) {
+    if (target) host = target;
+    open(day);
+  };
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".bz-metas, [data-bz-metas]");
+    if (b) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      open();
+      return;
+    }
+    if (document.documentElement.classList.contains("bz-goals-on")) {
+      var side = e.target.closest && e.target.closest("#workspace-context-sidebar button, #bz-menu-2026 button, #bz-menu-2026 a");
+      if (side && !side.classList.contains("bz-metas") && !side.classList.contains("nav-group-toggle") && !side.classList.contains("contextual-close")) {
+        closeView();
+      }
+    }
+  }, true);
+
+  window.addEventListener("popstate", function () {
+    var v = new URLSearchParams(location.search).get("view");
+    if (v === "metas") open(new URLSearchParams(location.search).get("day"));
+    else closeView();
+  });
+
+  function boot() {
+    if (window.__BZ_METAS === 0) return;
+    ensureMenu();
+    var v = new URLSearchParams(location.search).get("view");
+    if (v === "metas" || preview) open();
+  }
+
+  function checkEnabled(initial) {
+    return fetch("/api/goals/enabled", { credentials: "same-origin", cache: "no-store" })
+      .then(function (r) { return r.json().then(function (j) { return r.ok && j.enabled === true; }); })
+      .catch(function () { return false; })
+      .then(function (enabled) {
+        window.__BZ_METAS = enabled ? 1 : 0;
+        ensureMenu();
+        if (!enabled && document.documentElement.classList.contains("bz-goals-on")) {
+          ++loadSerial;
+          if (host) host.innerHTML = '<div id="bz-goals"><p class="bz-g-empty">Esta página está desligada no momento.</p></div>';
+        }
+        if (enabled && initial) boot();
+      });
+  }
+  checkEnabled(true);
+  setInterval(function () { checkEnabled(false); }, 30000);
+
+  new MutationObserver(function () { ensureMenu(); })
+    .observe(document.documentElement, { childList: true, subtree: true });
+})();

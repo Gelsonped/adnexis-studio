@@ -1,0 +1,204 @@
+/* Biziva visual system v1. Presentation only: no visibility or operation gates. */
+:root {
+  --bv-bg:#0c0c0f; --bv-surface:#171619; --bv-raised:#211f25;
+  --bv-field:#111014; --bv-line:#353138; --bv-text:#fff4e4;
+  --bv-muted:#bdb7c0; --bv-accent:#df2944; --bv-accent-hover:#e22a44;
+  --bv-radius:18px; --bv-small-radius:11px;
+}
+.workspace-shell {
+  --ink:var(--bv-text); --muted:var(--bv-muted); --border:var(--bv-line);
+  --red:#f23851; --red-text:#ff9ba9; --red-soft:#f238511c;
+  color:var(--bv-text); font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.workspace-shell {background:var(--bv-bg)}
+.workspace-shell :is(button,a,input,textarea,select,summary):focus-visible {
+  outline:3px solid #ff91a1; outline-offset:4px;
+}
+.workspace-shell :is(input,textarea,select):where(:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]):not([type=color])) {
+  background:var(--bv-field); border:1px solid var(--bv-line); color:var(--bv-text);
+  border-radius:var(--bv-small-radius); line-height:1.5; padding:11px 13px;
+  min-width:0; max-width:100%; box-shadow:none;
+}
+.workspace-shell input:where(:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]):not([type=color])),
+.workspace-shell select {min-height:46px}
+.workspace-shell :is(input,textarea)::placeholder {color:#939fb0;opacity:1}
+.workspace-shell :is(input,textarea,select):disabled {opacity:.58}
+.workspace-shell :is(input[type=checkbox],input[type=radio]) {accent-color:var(--bv-accent)}
+.workspace-shell .button {
+  border-radius:11px; min-height:44px; padding:11px 18px;
+  font-size:14px; font-weight:650; line-height:1.4; gap:8px;
+  transition:background .15s,border-color .15s,box-shadow .15s;
+}
+.workspace-shell .button.primary {
+  background:var(--bv-accent); border:1px solid transparent; color:#fff;
+  border-radius:11px; box-shadow:0 5px 16px #f238511f;
+}
+.workspace-shell .button.primary:hover:not(:disabled) {background:var(--bv-accent-hover);transform:none}
+.workspace-shell .button.secondary {
+  background:var(--bv-raised); border:1px solid var(--bv-line); color:var(--bv-text);
+}
+.workspace-shell .button.secondary:hover:not(:disabled) {background:#252d39;border-color:#536071}
+.workspace-shell .button:disabled {opacity:.48;cursor:not-allowed;box-shadow:none}
+/* App shell: strong navigation, calm work surface, readable cards. */
+:is(.workspace-shell.chat-home,.workspace-shell) {background:var(--bv-bg);--context-width:280px}
+:is(.workspace-shell.chat-home,.workspace-shell) .workspace-main,:is(.workspace-shell.chat-home,.workspace-shell) .chat-view {background:var(--bv-bg)}
+:is(.workspace-shell.chat-home,.workspace-shell) .workspace-header {height:68px;background:#111014;border-bottom:1px solid var(--bv-line);padding:0 28px}
+:is(.workspace-shell.chat-home,.workspace-shell) .workspace-header:after {display:none}
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-top-brand,:is(.workspace-shell.chat-home,.workspace-shell) .header-brand {letter-spacing:.02em;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-top-actions {gap:14px}
+:is(.workspace-shell.chat-home,.workspace-shell) .workspace-header button {border-radius:10px}
+:is(.workspace-shell.chat-home,.workspace-shell) .sidebar {background:#11151c;border-right:1px solid var(--bv-line)}
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-side-brand {padding-top:24px;padding-bottom:20px;border-bottom:1px solid var(--bv-line)}
+:is(.workspace-shell.chat-home,.workspace-shell) .sidebar .new-chat {border:1px solid #f2385152;background:#f2385118;color:#ffacb7;border-radius:12px;min-height:44px}
+:is(.workspace-shell.chat-home,.workspace-shell) .sidebar-history-search {background:var(--bv-field);border-color:var(--bv-line);border-radius:10px}
+:is(.workspace-shell.chat-home,.workspace-shell) .sidebar-history-search input {background:transparent;border:0;padding:8px 0;min-height:36px}
+:is(.workspace-shell.chat-home,.workspace-shell) .sidebar-history-list>button {color:var(--bv-muted);padding:11px 10px;border-radius:9px;font-size:13px}
+:is(.workspace-shell.chat-home,.workspace-shell) .sidebar-history-list>button:hover,:is(.workspace-shell.chat-home,.workspace-shell) .sidebar-history-list>button.current {background:var(--bv-raised);color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-nav {padding:16px 12px}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-nav .nav-group {border-color:var(--bv-line);margin:9px 0}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-nav .nav-group-toggle {color:#a5b1c2;font-size:11px;letter-spacing:.08em;padding:13px 10px}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-nav .nav-group-items>button {min-height:43px;padding:10px 12px;border-radius:9px;color:var(--bv-muted);font-size:13px}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-nav .nav-group-items>button:hover {background:#211f25;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-nav .nav-group-items>button.active,:is(.workspace-shell.chat-home,.workspace-shell) .nav-featured {background:#f2385119;color:#ffacb7;border-color:#f2385138}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-business {background:var(--bv-raised);border-color:var(--bv-line);border-radius:12px}
+:is(.workspace-shell.chat-home,.workspace-shell) .sidebar-bottom {background:#11151c;border-top:1px solid var(--bv-line)}
+:is(.workspace-shell.chat-home,.workspace-shell) .workspace-content {padding:32px clamp(18px,3.4vw,52px) 56px;min-width:0}
+:is(.workspace-shell.chat-home,.workspace-shell) .page-title {margin-bottom:26px;gap:18px}
+:is(.workspace-shell.chat-home,.workspace-shell) .page-title h1 {font-family:Manrope,system-ui,sans-serif;font-size:clamp(27px,3vw,38px);line-height:1.2;letter-spacing:-.035em;font-weight:700;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .page-title p {color:var(--bv-muted);font-size:15px;line-height:1.65;max-width:68ch;margin-top:9px}
+:is(.workspace-shell.chat-home,.workspace-shell) .eyebrow,:is(.workspace-shell.chat-home,.workspace-shell) .rd-label {color:#ff9eac;letter-spacing:.13em;font-size:10px;font-weight:650}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.settings-card,.resource-card,.info-panel,.table-card,.rd-kpi,.lib-card,.history-row,.organizations-team-header,.document-template-card,.document-saved-card,.fn-studio) {
+  background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:var(--bv-radius);box-shadow:0 6px 24px #00000012;color:var(--bv-text);
+}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.settings-card,.resource-card) {padding:25px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.settings-card,.resource-card) :is(h2,h3) {color:var(--bv-text);font-family:Manrope,system-ui,sans-serif;letter-spacing:-.025em;line-height:1.35}
+:is(.workspace-shell.chat-home,.workspace-shell) .settings-card h2 {font-size:19px;margin-bottom:17px}
+:is(.workspace-shell.chat-home,.workspace-shell) .resource-card h3 {font-size:18px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.settings-card,.resource-card)>p {color:var(--bv-muted);line-height:1.7;font-size:14px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.resource-grid,.connection-grid,.kpi-grid,.rc-grid,.wa-grid,.media-grid,.documents-grid,.documents-saved-grid) {gap:18px}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-kpi {padding:21px 23px}
+:is(.workspace-shell.chat-home,.workspace-shell) .rd-kpi :is(strong,.rd-big) {color:var(--bv-text);font-family:Manrope,system-ui,sans-serif;letter-spacing:-.045em}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-card-head,.wa-card-head,.section-row,.documents-heading) {gap:16px;align-items:center}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-muted,.wa-muted,.rc-muted,.muted,.rd-footnote) {color:var(--bv-muted)}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-tabs,.category-tabs,.fn-tabs,.studio-tabs) {gap:6px;padding:5px;border:1px solid var(--bv-line);border-radius:12px;background:#11151c;overflow-x:auto;scrollbar-width:thin}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-tabs,.category-tabs,.fn-tabs,.studio-tabs)>button {border-radius:8px;border:0;padding:10px 15px;color:var(--bv-muted);white-space:nowrap;min-height:42px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-tabs,.category-tabs,.fn-tabs,.studio-tabs)>button.active,
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-tabs,.category-tabs,.fn-tabs,.studio-tabs)>button[aria-selected=true] {background:var(--bv-raised);color:var(--bv-text);box-shadow:0 2px 6px #0003}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-table,.table-card table) {font-size:14px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-th,thead) {background:#111014;color:var(--bv-muted);font-size:12px;letter-spacing:.025em}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-tr,tbody tr,td,th) {border-color:var(--bv-line)}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-tr,tbody tr):hover:not(.rd-th) {background:#ffffff03}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-search,.search-input,.history-search,.lib-search) {background:var(--bv-field);border:1px solid var(--bv-line);border-radius:11px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-search,.search-input,.history-search,.lib-search) input {border:0;background:transparent;box-shadow:none}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.empty-state,.lib-empty,.document-empty,.feature-loading) {border:1px dashed #3c4655;border-radius:18px;background:#12171e;padding:36px 24px;color:var(--bv-muted);line-height:1.7}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.empty-symbol,.lib-empty-icon,.resource-icon) {background:#f2385117;color:#ff9eac;border-radius:14px}
+/* Chat remains a single natural-language composer. */
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-welcome {max-width:780px;margin:0 auto;padding-left:24px;padding-right:24px}
+:is(.workspace-shell.chat-home,.workspace-shell) .workspace-central-brand>span {color:var(--bv-text);font-size:44px;letter-spacing:-.055em}
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-welcome>p {font-size:16px;line-height:1.7;color:var(--bv-muted);max-width:55ch;margin:18px auto}
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-recents {width:min(100%,680px);margin:32px auto 0}
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-recents-head {font-size:11px;letter-spacing:.08em;color:var(--bv-muted);margin-bottom:12px}
+:is(.workspace-shell.chat-home,.workspace-shell) .chat-recents>button {background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:12px;min-height:52px;color:var(--bv-text);margin-bottom:8px}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer-area {max-width:850px;padding:18px 24px 24px}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer {border:1px solid #465060;border-radius:22px;background:#191e27;box-shadow:0 12px 32px #0003;overflow:hidden}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer:focus-within {border-color:#ff879b;box-shadow:0 0 0 3px #f2385116,0 12px 32px #0003}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer textarea {background:transparent;border:0;border-radius:0;padding:19px 21px;min-height:98px;color:var(--bv-text);font-size:16px;line-height:1.65;resize:vertical}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer-actions {padding:9px 14px 14px}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer-tool-button {background:transparent;border-color:#3a4351;color:var(--bv-muted);border-radius:10px;min-height:42px}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer-tool-button:hover {background:#242d3b;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .send-button {background:var(--bv-accent);color:white;border:0;width:44px;height:44px;border-radius:13px;box-shadow:none}
+:is(.workspace-shell.chat-home,.workspace-shell) .send-button:disabled {background:#394150;color:#b0b8c4;opacity:.65}
+:is(.workspace-shell.chat-home,.workspace-shell) .composer-caption {color:var(--bv-muted);font-size:11px;line-height:1.5}
+:is(.workspace-shell.chat-home,.workspace-shell) .message-list {padding:32px 24px;max-width:900px;width:100%;margin:0 auto}
+:is(.workspace-shell.chat-home,.workspace-shell) .message-content {font-size:16px;line-height:1.8;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .markdown :is(p,li,h1,h2,h3,h4,h5,h6) {color:inherit}
+:is(.workspace-shell.chat-home,.workspace-shell) .markdown a {color:#ffacb7}
+:is(.workspace-shell.chat-home,.workspace-shell) .markdown code {background:#252d3a;color:#dce4f1}
+:is(.workspace-shell.chat-home,.workspace-shell) .markdown pre {background:#090d13;border:1px solid var(--bv-line);border-radius:12px}
+:is(.workspace-shell.chat-home,.workspace-shell) .markdown blockquote {color:var(--bv-muted);border-left-color:#f23851}
+/* Conversations, funnel and operations retain their layouts and status colors. */
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-card {background:var(--bv-surface);border-color:var(--bv-line);border-radius:18px;overflow:hidden}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-search {background:#171619;border-color:var(--bv-line);padding:16px}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-search input {background:var(--bv-field);border-color:var(--bv-line)}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-filters {display:flex;gap:7px;flex-wrap:wrap;white-space:normal;overflow:visible}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-filters button {background:transparent;border:1px solid #3b4350;border-radius:9px;min-height:38px;padding:8px 12px;color:var(--bv-muted);white-space:nowrap}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-filters button[aria-selected=true] {background:#f2385124;border-color:#f2385166;color:#ffb1bc}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-row {border-color:var(--bv-line);padding:16px;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-row:hover {background:#202733}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-empty {color:var(--bv-muted);padding:40px 20px;line-height:1.65}
+:is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-status {background:#11151c;border-color:var(--bv-line);color:var(--bv-muted);padding:12px 16px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.fn-stage,.fn-editor,.fn-step,.of-editor) {background:var(--bv-surface);border-color:var(--bv-line);border-radius:14px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.fn-card,.fn-item,.fn-media-row,.of-row) {background:#211f25;border-color:#384252;border-radius:12px}
+:is(.workspace-shell.chat-home,.workspace-shell) .fn-savebar {background:#11151c;border-color:var(--bv-line);padding:15px;border-radius:14px;gap:12px}
+:is(.workspace-shell.chat-home,.workspace-shell) .fn-fields label {color:var(--bv-muted);line-height:1.5}
+:is(.workspace-shell.chat-home,.workspace-shell) .fn-preview {background:#0d1219;border-color:var(--bv-line);border-radius:16px}
+:is(.workspace-shell.chat-home,.workspace-shell) .fn-flow-wrap {background:#11151c;border-color:var(--bv-line);border-radius:16px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.lib-bar,.history-filters,.documents-toolbar) {gap:12px;flex-wrap:wrap}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.lib-meta,.media-card figcaption) {padding:14px;color:var(--bv-muted)}
+:is(.workspace-shell.chat-home,.workspace-shell) .lib-thumb {background:#111014;border-radius:14px 14px 0 0}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rc-seg,.rd-segmented) {background:#11151c;border-color:var(--bv-line);border-radius:10px;padding:4px}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rc-seg,.rd-segmented)>button {border-radius:7px;min-height:38px;color:var(--bv-muted)}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.rc-seg,.rd-segmented)>button.active {background:#28313e;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .modal-overlay {background:#080b13b8;backdrop-filter:blur(7px)}
+:is(.workspace-shell.chat-home,.workspace-shell) :is(.modal,.lib-modal,.lib-sheet) {background:var(--bv-surface);border:1px solid #465060;border-radius:22px;color:var(--bv-text);box-shadow:0 24px 90px #0008}
+:is(.workspace-shell.chat-home,.workspace-shell) .modal-title {margin-bottom:24px}
+:is(.workspace-shell.chat-home,.workspace-shell) .modal-title h2 {font-size:22px;color:var(--bv-text)}
+:is(.workspace-shell.chat-home,.workspace-shell) .navigation-backdrop {background:#070a12b8;backdrop-filter:blur(3px)}
+/* Responsive sizing never changes visibility of functional controls. */
+@media(min-width:1100px) {
+  :is(.workspace-shell.chat-home,.workspace-shell) .rd-content {max-width:1440px;width:100%;margin:0 auto}
+  :is(.workspace-shell.chat-home,.workspace-shell) .chat-recents>button {padding:14px 18px}
+}
+@media(max-width:900px) {
+  :is(.workspace-shell.chat-home,.workspace-shell) :is(.settings-card,.resource-card) {padding:21px}
+}
+@media(max-width:600px) {
+  .workspace-shell :is(input,textarea,select):where(:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]):not([type=color])) {font-size:16px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .workspace-header {height:60px;padding:0 16px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .workspace-content {padding:24px 16px 40px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .page-title {margin-bottom:22px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .page-title h1 {font-size:29px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .page-title p {font-size:14px}
+  :is(.workspace-shell.chat-home,.workspace-shell) :is(.settings-card,.resource-card) {padding:20px;border-radius:16px}
+  :is(.workspace-shell.chat-home,.workspace-shell) :is(.resource-grid,.connection-grid,.rc-grid,.wa-grid,.documents-grid,.documents-saved-grid) {grid-template-columns:minmax(0,1fr);gap:14px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .kpi-grid {gap:10px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .rd-kpi {padding:16px 14px;border-radius:14px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .rd-kpi :is(strong,.rd-big) {font-size:26px}
+  :is(.workspace-shell.chat-home,.workspace-shell) :is(.rd-head,.rd-head-actions,.rd-table-tools,.lib-bar,.fn-savebar,.account-actions) {flex-wrap:wrap;gap:10px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-filters button {min-height:40px;font-size:12px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .wa-lv-search {padding:12px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .chat-welcome {padding:0 20px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .workspace-central-brand>span {font-size:36px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .chat-welcome>p {font-size:15px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .chat-recents {margin-top:26px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .composer-area {padding:14px 16px 18px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .composer {border-radius:18px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .composer textarea {padding:16px;min-height:92px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .composer-actions {padding:8px 12px 12px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .message-list {padding:24px 17px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .message-content {font-size:16px}
+  :is(.workspace-shell.chat-home,.workspace-shell) .modal-overlay {padding:14px}
+  :is(.workspace-shell.chat-home,.workspace-shell) :is(.modal,.lib-modal) {padding:23px;border-radius:18px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .workspace-shell :is(button,a,input,select,textarea) {transition:none}
+}
+
+
+/* Cinematic depth is limited to the work surface; functional colors remain distinct. */
+.workspace-shell.chat-home {--bz-bg:var(--bv-bg);--bz-panel:var(--bv-surface);--bz-panel-2:var(--bv-raised);--bz-field:var(--bv-field);--bz-cream:var(--bv-text);--bz-muted:var(--bv-muted);--bz-line:var(--bv-line);background:var(--bv-bg)}
+.workspace-shell.chat-home .workspace-main {background:radial-gradient(ellipse at 80% 0,#e3263607,transparent 45%),var(--bv-bg)}
+.workspace-shell.chat-home .composer-area {background:linear-gradient(transparent,var(--bv-bg) 16px)}
+.workspace-shell .fn-tabs button.on {background:#e3263620;border-color:#e3263670;color:#ffb1bc}
+.workspace-shell .rd-kpi>span {display:block;margin-bottom:8px}
+.workspace-shell .rd-kpi>strong {display:block}
+.workspace-shell .composer-tools {background:var(--bv-surface);border-top:1px solid var(--bv-line);padding:18px}
+body:has(.workspace-shell) {background:var(--bv-bg);color:var(--bv-text)}
+
+/* Open product forms: hidden upload must not create a mobile scroll track. */
+:is(.workspace-shell.chat-home,.workspace-shell) input.pimg-input { position:absolute; width:1px!important; height:1px!important; padding:0; margin:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+/* Keep long dialogs usable in short viewports, including browser keyboard resize. */
+.workspace-shell .modal-overlay { overflow-y:auto; overscroll-behavior:contain; }
+.workspace-shell :is(.modal,.lib-modal) { max-height:calc(100dvh - 28px); overflow-y:auto; overscroll-behavior:contain; }
+@media (prefers-reduced-motion:reduce) { .workspace-shell *, .workspace-shell *::before, .workspace-shell *::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }

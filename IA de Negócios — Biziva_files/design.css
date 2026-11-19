@@ -1,0 +1,572 @@
+/* Biziva design 2026-10-12 (pacote Codex). Apresentação apenas; sem gates de operação. */
+.workspace-shell{--bv-bg:#0d0d10;--bv-surface:#15161b;--bv-raised:#1c1d23;--bv-text:#f5efdf;--bv-muted:#aba9b3;--bv-line:#303139;--bv-field-line:#666874;--bv-brand:#e71c3c;--bv-primary:#cc1432;--bv-focus:#f28a9a;background:var(--bv-bg);color:var(--bv-text)}
+.workspace-shell :is(button,a,input,textarea,select,summary):focus-visible{outline:2px solid var(--bv-focus);outline-offset:3px}
+.workspace-shell :is(input,textarea,select):where(:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]):not([type=color])){border-color:var(--bv-field-line)}
+.workspace-shell :is(.primary,.btn-primary,button[type=submit]):not(:disabled){background:var(--bv-primary);border-color:var(--bv-primary);color:#fff7ea}
+.workspace-shell .sidebar{background:#0b0b0e;border-right:1px solid var(--bv-line)}
+.workspace-shell .sidebar .nav-featured{display:flex;align-items:center;gap:10px;min-height:44px;margin:6px 0 2px;border-radius:10px;background:transparent;color:var(--bv-text);border:1px solid transparent;font-weight:600}
+.workspace-shell .sidebar .nav-featured .rd-featured-arrow{display:none}
+.workspace-shell .nav-direct-block{display:flex;flex-direction:column;gap:2px;padding:0 0 12px;margin:0 0 10px;border-bottom:1px solid var(--bv-line)}
+.workspace-shell .nav-direct-block>button{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:10px;background:transparent;border:1px solid transparent;color:var(--bv-text);font:inherit;font-weight:600;text-align:left;cursor:pointer;width:100%}
+.workspace-shell :is(.nav-direct-block>button,.sidebar .nav-featured):hover{background:#ffffff0a}
+.workspace-shell :is(.nav-direct-block>button.active,.sidebar .nav-featured.active){background:#f5efdf12;border-color:#f5efdf24;box-shadow:inset 3px 0 0 var(--bv-brand)}
+.workspace-shell :is(.nav-direct-block>button.active,.sidebar .nav-featured.active) svg{color:var(--bv-brand)}
+.workspace-shell .nav-group-toggle{color:var(--bv-muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.workspace-shell .nav-group-items button.active{box-shadow:inset 3px 0 0 var(--bv-brand);background:#f5efdf0f;color:var(--bv-text)}
+.workspace-shell [data-enterprise-entry]{display:flex;align-items:center;gap:10px;min-height:44px;width:100%;margin:4px 0;padding:0 12px;border-radius:10px;border:1px solid #e71c3c55;background:linear-gradient(90deg,#e71c3c1c,transparent);color:var(--bv-text);font:inherit;font-weight:700;cursor:pointer;text-align:left}
+.workspace-shell [data-enterprise-entry]::before{content:"API";font-size:10px;letter-spacing:.08em;padding:2px 6px;border-radius:6px;background:var(--bv-primary);color:#fff7ea}
+/* API empresarial: área dedicada, organizada em superfícies */
+.enterprise-dialog{width:min(1040px,96vw)!important;max-height:92dvh!important;padding:32px 36px!important;background:#0d0d10!important;border:1px solid #303139!important;border-radius:20px!important;color:#f5efdf!important;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px;align-content:start}
+.enterprise-dialog[open]{display:grid}
+.enterprise-dialog>header,.enterprise-dialog>[role=alert],.enterprise-dialog>details,.enterprise-dialog>section:has(ul),.enterprise-dialog>section:nth-of-type(n+3),.enterprise-dialog>section:not(:has(form)):has(textarea){grid-column:1/-1}
+.enterprise-dialog>header{padding-bottom:18px;border-bottom:1px solid #303139}
+.enterprise-dialog>header small{color:#f28a9a!important;letter-spacing:.12em;font-size:12px}
+.enterprise-dialog>header h1{font-size:34px!important;letter-spacing:-.02em}
+.enterprise-dialog>section{background:#15161b;border:1px solid #303139!important;border-radius:18px;padding:22px!important;margin:0}
+.enterprise-dialog>section h2{font-size:13px!important;letter-spacing:.08em;text-transform:uppercase;color:#aba9b3}
+.enterprise-dialog>section strong[role=status]{display:block;font-size:34px;font-weight:700;margin:4px 0 6px;color:#f5efdf}
+.enterprise-dialog>section p{font-size:14px}
+.enterprise-dialog button[type=submit]:not(:disabled){background:#cc1432!important;border-color:#cc1432!important;color:#fff7ea!important;min-height:44px}
+.enterprise-dialog button{min-height:44px}
+.enterprise-dialog input,.enterprise-dialog select,.enterprise-dialog textarea{border-color:#666874!important;background:#101115!important;font-size:16px!important}
+.enterprise-dialog>details{background:#15161b;border:1px solid #303139;border-radius:18px;padding:18px 22px}
+.enterprise-dialog>details summary{cursor:pointer;font-weight:600}
+.enterprise-dialog .enterprise-key{border-top:1px solid #303139}
+.enterprise-dialog .enterprise-key:first-child{border-top:0}
+@media(max-width:700px){.enterprise-dialog{grid-template-columns:1fr;padding:20px!important;width:100vw!important;max-height:100dvh!important;border-radius:0!important}.enterprise-dialog>header h1{font-size:28px!important}}
+/* Telas de acesso (/entrar) */
+body:has(.auth-card,.auth-shell,.login-card) {background:#0d0d10;color:#f5efdf}
+/* Páginas internas (funil, produtos, pedidos, automações, marketing, arquivos, configurações) */
+.workspace-shell .workspace-main{background:var(--bv-bg)}
+.workspace-shell .page-stack{max-width:1440px;gap:20px}
+.workspace-shell :is(h1,h2).page-title{font-size:38px;line-height:1.1;letter-spacing:-.02em;font-weight:600;color:var(--bv-text);margin:0 0 6px}
+.workspace-shell .eyebrow{color:var(--bv-focus);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.workspace-shell :is(.settings-card,.resource-card,.rc-card,.info-panel,.wa-card,.rd-kpi,.biziva-stat,.fn-stack>section){background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:18px;box-shadow:none}
+.workspace-shell :is(.settings-card,.resource-card,.rc-card,.info-panel){padding:22px}
+.workspace-shell .settings-card h2,.workspace-shell .resource-card h3{font-size:19px;font-weight:600;color:var(--bv-text)}
+.workspace-shell :is(.resource-grid,.kpi-grid,.rc-grid){gap:16px}
+.workspace-shell :is(.rd-kpi,.biziva-stat) strong{font-size:28px;color:var(--bv-text)}
+.workspace-shell :is(.muted,.rd-muted,.rc-muted,.wa-muted,.studio-note,.temporary-note){color:var(--bv-muted)}
+.workspace-shell :is(button.primary,.button.primary,a.primary):not(:disabled){background:var(--bv-primary);border-color:var(--bv-primary);color:#fff7ea;min-height:44px;border-radius:10px}
+.workspace-shell :is(button.secondary,.button.secondary,a.secondary){background:transparent;border:1px solid var(--bv-line);color:var(--bv-text);min-height:44px;border-radius:10px}
+.workspace-shell :is(button.secondary,.button.secondary):hover{border-color:#f5efdf55}
+.workspace-shell .empty-state{background:transparent;border:1px dashed var(--bv-line);border-radius:18px;padding:40px 24px;text-align:center;color:var(--bv-muted)}
+.workspace-shell .empty-state :is(h2,h3,strong){color:var(--bv-text)}
+.workspace-shell .error-banner{background:#e71c3c14;border:1px solid #e71c3c55;color:#ffd0d6;border-radius:12px}
+.workspace-shell .rd-tabs{display:flex;gap:4px;border-bottom:1px solid var(--bv-line);overflow-x:auto;scrollbar-width:none}
+.workspace-shell .rd-tabs button{background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;color:var(--bv-muted);min-height:44px;padding:0 14px;white-space:nowrap}
+.workspace-shell .rd-tabs button.active{color:var(--bv-text);border-bottom-color:var(--bv-brand)}
+.workspace-shell .tag,.workspace-shell .rc-pill{border:1px solid var(--bv-line);background:var(--bv-raised);color:var(--bv-text);border-radius:999px}
+.workspace-shell table{border-collapse:collapse;width:100%}
+.workspace-shell :is(th,td){border-bottom:1px solid var(--bv-line);padding:12px 10px;text-align:left}
+.workspace-shell th{color:var(--bv-muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.workspace-shell :is(.modal,.modal-overlay>div){background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:20px}
+.workspace-shell .modal-overlay{background:#000a;backdrop-filter:blur(6px)}
+.workspace-shell .section-row{border-bottom:1px solid var(--bv-line)}
+@media(max-width:700px){.workspace-shell :is(h1,h2).page-title{font-size:30px}.workspace-shell :is(.settings-card,.resource-card,.rc-card,.info-panel){padding:18px}.workspace-shell :is(.resource-grid,.kpi-grid,.rc-grid){grid-template-columns:1fr}.workspace-shell :where(.table-wrap,.rd-wide){overflow-x:auto;max-width:100%}}
+/* Título da API no celular */
+@media(max-width:700px){.enterprise-dialog>header{position:relative;display:block!important;padding-right:0}.enterprise-dialog>header>button{position:absolute;top:0;right:0;min-height:40px!important;padding:8px 14px!important}.enterprise-dialog>header small{display:block;padding-right:96px;line-height:1.4}.enterprise-dialog>header h1{font-size:26px!important;white-space:nowrap;margin-top:14px!important}}
+
+/* Auditoria visual autenticada — 15/10/2026. */
+/* Uma única superfície por indicador; rótulos longos preservam a linha dos valores. */
+.workspace-shell .rd-kpi:has(>.biziva-stat.resource-card){padding:18px;min-width:0}
+.workspace-shell .rd-kpi>.biziva-stat.resource-card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;min-height:0;min-width:0}
+.workspace-shell .rd-kpi>.biziva-stat.resource-card>small{display:block;min-height:2.8em;line-height:1.4;overflow-wrap:anywhere}
+.workspace-shell .rd-kpi>.biziva-stat.resource-card>strong{display:block;margin-top:8px;font-size:clamp(22px,2vw,28px);line-height:1.15;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+/* Os acessos novos usam links, não botões. */
+.workspace-shell .nav-group-items>a{display:flex;align-items:center;gap:10px;min-height:44px;padding:10px 12px;border:1px solid transparent;border-radius:10px;color:var(--bv-muted);font:inherit;font-size:14px;text-decoration:none;line-height:1.4}
+.workspace-shell .nav-group-items>a:hover{background:#ffffff0a;color:var(--bv-text)}
+.workspace-shell .nav-group-items>a[aria-current=page]{background:#f5efdf0f;color:var(--bv-text);box-shadow:inset 3px 0 0 var(--bv-brand)}
+/* A área de upload mantém o controle nativo acessível sem duplicar a interface. */
+.workspace-shell .biziva-batch-upload .bz-drop{position:relative;min-height:112px;padding:22px;gap:8px;cursor:pointer}
+.workspace-shell .biziva-batch-upload .bz-drop>input[type=file]{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.workspace-shell .biziva-batch-upload .bz-drop:focus-within{outline:2px solid var(--bv-focus);outline-offset:3px}
+.workspace-shell .biziva-batch-upload .bz-drop>small{max-width:70ch;line-height:1.5}
+/* O modo página da API também precisa do grid, além do antigo modal. */
+.workspace-shell #bz-inshell .enterprise-dialog{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-content:start}
+.workspace-shell #bz-inshell .enterprise-dialog>header{grid-column:1/-1;margin-bottom:2px}
+.workspace-shell #bz-inshell .enterprise-dialog>section{min-width:0}
+.workspace-shell select{min-height:44px;max-width:100%;font-size:16px}
+@media(max-width:700px){
+ .workspace-shell #bz-inshell .enterprise-dialog{grid-template-columns:minmax(0,1fr);gap:16px}
+ .workspace-shell .rd-kpi:has(>.biziva-stat.resource-card){padding:16px}
+ .workspace-shell .biziva-batch-upload .bz-drop{padding:18px;min-height:112px}
+ .workspace-shell .biziva-batch-upload .bz-drop>strong{line-height:1.4}
+}
+
+/* Internal page refinements only. No sidebar, branding, favicon or public selectors. */
+.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page),#bz-fin{max-width:1480px;width:100%;margin-inline:auto;gap:24px;min-width:0;box-sizing:border-box}
+.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page) h1,#bz-fin h1{font-size:clamp(28px,3vw,36px);letter-spacing:-.045em;line-height:1.15}
+.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page) .eyebrow{font-size:11px;letter-spacing:.13em;color:var(--bv-focus);font-weight:600}
+.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page) .rd-head{align-items:center;gap:20px}
+.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page) .rd-head p{font-size:14px;line-height:1.6;margin-top:8px;color:var(--bv-muted)}
+.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page) :is(.button,.text-button){min-height:40px}
+.workspace-shell .bz-products>.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:18px;align-items:start}
+.workspace-shell .bz-products .bz-product-card{display:flex;flex-direction:column;gap:16px;padding:24px;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:18px;min-width:0;box-shadow:none}
+.workspace-shell .bz-products .bz-product-card h3{font-size:21px;line-height:1.3;letter-spacing:-.025em;margin:0;overflow-wrap:anywhere}
+.workspace-shell .bz-products .bz-product-card>p{margin:0;font-size:13px;line-height:1.65;color:var(--bv-muted)}
+.workspace-shell .bz-products .bz-product-card>button{width:100%;background:var(--bv-raised);border-color:var(--bv-line);margin:0}
+.workspace-shell .bz-products :is(.bz-product-options,.bz-product-extra){border:0;border-top:1px solid var(--bv-line);padding:0;margin:0;background:transparent;min-width:0}
+.workspace-shell .bz-products :is(.bz-product-options,.bz-product-extra)>summary{cursor:pointer;min-height:44px;display:list-item;list-style-position:inside;font-size:13px;font-weight:500;color:var(--bv-muted);padding:14px 0 4px}
+.workspace-shell .bz-products :is(.bz-product-options,.bz-product-extra)[open]>summary{color:var(--bv-text);padding-bottom:16px}
+.workspace-shell .bz-product-option-body{display:flex;flex-wrap:wrap;gap:10px;align-items:center;min-width:0}
+.workspace-shell .bz-product-option-body>:is(p,div){flex-basis:100%;min-width:0;overflow-wrap:anywhere;margin:0 0 6px}
+.workspace-shell .bz-product-option-body>button{flex:1 1 120px;padding:9px 12px;font-size:12px}
+.workspace-shell .bz-product-option-body>button:last-child{color:#ff9ba9;background:transparent}
+.workspace-shell .bz-products #product-form{padding:28px;display:flex;flex-direction:column;gap:20px;border-radius:18px}
+.workspace-shell .bz-products #product-form>h2{margin:0;font-size:24px}
+.workspace-shell .bz-products #product-form label{font-size:13px;line-height:1.6}
+.workspace-shell .bz-products #product-form :is(input,textarea,select){font-size:14px}
+.workspace-shell .bz-products .bz-product-extra-body{display:grid;gap:20px;padding-bottom:12px}
+.workspace-shell .bz-products .bz-product-extra-body>label{display:grid;gap:8px}
+.workspace-shell .rd-orders .rd-segmented{align-self:flex-start;width:fit-content;padding:4px;border:1px solid var(--bv-line);border-radius:12px;background:var(--bv-surface)}
+.workspace-shell .rd-orders .rd-segmented button{padding:9px 18px;border-radius:8px;font-size:13px;min-height:38px}
+.workspace-shell .rd-orders .rd-segmented button.active{background:var(--bv-raised);color:var(--bv-text);box-shadow:0 1px 4px #0003}
+.workspace-shell .rd-orders .rd-kpis{gap:14px}
+.workspace-shell .rd-orders .rd-kpi{padding:20px;border-radius:16px;min-width:0}
+.workspace-shell .rd-orders .rd-kpi small{font-size:12px;line-height:1.5;min-height:36px;color:var(--bv-muted)}
+.workspace-shell .rd-orders .rd-kpi strong{font-size:clamp(21px,2.2vw,30px);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.workspace-shell .rd-orders .rd-table-card{padding:0;border-radius:18px;overflow:hidden;background:var(--bv-surface)}
+.workspace-shell .rd-orders .rd-table-tools{padding:20px 24px;border-bottom:1px solid var(--bv-line);gap:16px;align-items:end}
+.workspace-shell .rd-orders .rd-table-tools label{font-size:12px;color:var(--bv-muted);display:grid;gap:8px}
+.workspace-shell .rd-orders .rd-table-tools .rd-search{margin-left:auto;min-width:220px}
+.workspace-shell .rd-orders .rd-tr{padding:18px 24px;gap:18px;font-size:14px;min-height:80px;background:transparent;border-bottom:1px solid var(--bv-line)}
+.workspace-shell .rd-orders .rd-th{font-size:10px;letter-spacing:.1em;text-transform:uppercase;min-height:48px;color:var(--bv-muted)}
+.workspace-shell .rd-orders .rd-tr:not(.rd-th):hover,.workspace-shell .rd-orders .rd-tr.on{background:var(--bv-raised)}
+.workspace-shell .rd-orders .rd-tr small{font-size:12px;margin-top:6px;line-height:1.5}
+.workspace-shell .rd-orders .rd-footnote{font-size:12px;line-height:1.7;color:var(--bv-muted);max-width:850px;margin:0}
+.workspace-shell .rd-orders .sale-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+/* Compact funnel summaries bring the actual editor into the first screen. */
+.workspace-shell .bz-funnel-page>.rd-funnel-head{margin:0;gap:16px}
+.workspace-shell .bz-funnel-page>.rd-funnel-head h2{font-size:16px;margin:0}
+.workspace-shell .bz-funnel-page>.rd-funnel-cards{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;max-height:300px;overflow:auto;scrollbar-gutter:stable}
+.workspace-shell .bz-funnel-page .rd-funnel-card{display:grid;grid-template-columns:minmax(150px,1.5fr) auto minmax(150px,1fr) minmax(130px,.8fr) auto;gap:18px;align-items:center;padding:16px 20px;min-height:92px;border-radius:14px;box-shadow:none;background:var(--bv-surface)}
+.workspace-shell .bz-funnel-page .rd-funnel-card.on{border-color:#e71c3c88;background:linear-gradient(110deg,#e71c3c09,transparent),var(--bv-surface)}
+.workspace-shell .bz-funnel-page .rd-funnel-open{text-align:left;min-width:0;padding:0;background:transparent;border:0}
+.workspace-shell .bz-funnel-page .rd-funnel-open b{font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.workspace-shell .bz-funnel-page .rd-funnel-open small{font-size:12px;line-height:1.5;margin-top:4px}
+.workspace-shell .bz-funnel-page .rd-funnel-card .wa-switch{font-size:12px;margin:0;justify-content:flex-start}
+.workspace-shell .bz-funnel-page .rd-funnel-metrics{display:flex;gap:24px;margin:0;border:0;padding:0}
+.workspace-shell .bz-funnel-page .rd-funnel-metrics>div{padding:0;background:transparent;border:0}
+.workspace-shell .bz-funnel-page .rd-funnel-metrics small{font-size:10px;color:var(--bv-muted)}
+.workspace-shell .bz-funnel-page .rd-funnel-metrics strong{font-size:20px;font-variant-numeric:tabular-nums}
+.workspace-shell .bz-funnel-page .fn-delete{font-size:11px;color:var(--bv-muted);padding:5px}
+.workspace-shell .bz-funnel-page .fn-tabs{border-bottom:1px solid var(--bv-line);gap:20px;padding:0;overflow-x:auto;flex-wrap:nowrap}
+.workspace-shell .bz-funnel-page .fn-tabs>button{min-height:48px;white-space:nowrap;border-radius:0;border:0;border-bottom:2px solid transparent;background:transparent;font-size:13px;padding:12px 4px;color:var(--bv-muted)}
+.workspace-shell .bz-funnel-page .fn-tabs>button.on{color:var(--bv-text);border-bottom-color:var(--bv-brand);background:transparent}
+.workspace-shell .bz-funnel-page .fn-listlayout{gap:22px;grid-template-columns:240px minmax(0,1fr)}
+.workspace-shell .bz-funnel-page .fn-step{border-radius:10px;min-height:64px;padding:12px;gap:12px}
+.workspace-shell .bz-funnel-page .fn-step-t b{font-size:13px}
+.workspace-shell .bz-funnel-page .fn-step-t small{font-size:11px;line-height:1.5}
+/* Finance tabs preserve the same controls, tables and financial requests. */
+#bz-fin .bz-fin-tabs{display:flex;gap:24px;border-bottom:1px solid var(--bv-line);margin-bottom:8px}
+#bz-fin .bz-fin-tabs button{padding:14px 0;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--bv-muted);font:inherit;font-size:14px;min-height:48px;cursor:pointer}
+#bz-fin .bz-fin-tabs button[aria-selected=true]{border-bottom-color:var(--bv-brand);color:var(--bv-text)}
+#bz-fin [hidden]{display:none!important}
+#bz-fin .bz-fin-hero{display:flex;align-items:center;justify-content:space-between;gap:28px;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:20px;padding:32px;min-width:0}
+#bz-fin .bz-fin-hero small{font-size:14px;color:var(--bv-muted)}
+#bz-fin .bz-fin-hero strong{display:block;font-size:clamp(32px,4vw,48px);line-height:1.3;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin:14px 0}
+#bz-fin .bz-fin-hero .sub{font-size:13px;line-height:1.6}
+#bz-fin .bz-fin-meta{display:flex;gap:20px;font-size:12px;color:var(--bv-muted);margin-top:20px}
+#bz-fin .bz-fin-meta b{color:var(--bv-text);font-weight:500;font-size:14px;margin-left:8px}
+#bz-fin .bz-fin-hero button{min-height:48px;padding:12px 24px;white-space:nowrap;border-radius:12px}
+#bz-fin .bz-fin-counts{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#bz-fin .settings-card{padding:24px;border-radius:18px;min-width:0}
+#bz-fin .settings-card h2{font-size:20px;line-height:1.4;margin-top:0}
+#bz-fin .settings-card h2 small{display:block;font-size:12px;margin-top:6px}
+#bz-fin .bz-fin-recipient{display:grid;grid-template-columns:1fr auto;gap:8px 24px;align-items:center}
+#bz-fin .bz-fin-recipient h2{font-size:16px;margin:0}
+#bz-fin .bz-fin-recipient p{grid-column:1;margin:0;font-size:13px}
+#bz-fin .bz-fin-recipient .row{grid-column:2;grid-row:1/3;margin:0}
+#bz-fin th{padding:14px 12px;font-size:10px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+#bz-fin td{padding:18px 12px;line-height:1.5;font-size:13px;font-variant-numeric:tabular-nums}
+#bz-fin .pill{font-size:11px;padding:4px 10px;white-space:nowrap}
+#bz-fin input:focus-visible,#bz-fin button:focus-visible{outline:2px solid var(--bv-focus);outline-offset:3px}
+@media(max-width:1100px){.workspace-shell .rd-orders .rd-kpis-5{grid-template-columns:repeat(3,minmax(0,1fr))}.workspace-shell .bz-funnel-page .rd-funnel-card{grid-template-columns:minmax(140px,1fr) auto auto;gap:12px}.workspace-shell .bz-funnel-page .rd-funnel-metrics{grid-column:1/3}.workspace-shell .bz-funnel-page .fn-delete{grid-column:3}.workspace-shell .bz-funnel-page .rd-funnel-card>.wa-switch{grid-column:3;grid-row:1}.workspace-shell .bz-funnel-page .fn-listlayout{grid-template-columns:210px minmax(0,1fr)}}
+@media(max-width:700px){.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page),#bz-fin{gap:20px}.workspace-shell .bz-products .rd-head,.workspace-shell .bz-funnel-page>.rd-head{align-items:flex-start;flex-direction:column}.workspace-shell .bz-products #product-form{padding:18px}.workspace-shell .bz-products .bz-product-card{padding:20px}.workspace-shell .rd-orders .rd-kpis-5{grid-template-columns:repeat(2,minmax(0,1fr))}.workspace-shell .rd-orders .rd-kpi{padding:16px}.workspace-shell .rd-orders .rd-kpi strong{font-size:23px}.workspace-shell .rd-orders .rd-segmented{max-width:100%;display:flex}.workspace-shell .rd-orders .rd-segmented button{padding:9px 12px}.workspace-shell .rd-orders .rd-table-tools{padding:16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.workspace-shell .rd-orders .rd-table-tools .rd-search{grid-column:1/-1;margin:0;width:100%;min-width:0}.workspace-shell .rd-orders .rd-table-tools select{width:100%;min-width:0}.workspace-shell .rd-orders .rd-tr{padding:16px;gap:12px}.workspace-shell .rd-orders .sale-detail{grid-template-columns:minmax(0,1fr)}.workspace-shell .bz-funnel-page>.rd-funnel-cards{max-height:310px}.workspace-shell .bz-funnel-page .rd-funnel-card{grid-template-columns:minmax(0,1fr) auto;padding:16px;gap:12px}.workspace-shell .bz-funnel-page .rd-funnel-card>.wa-switch{grid-column:1;grid-row:2}.workspace-shell .bz-funnel-page .rd-funnel-metrics{grid-column:1;grid-row:3;gap:30px}.workspace-shell .bz-funnel-page .fn-delete{grid-column:2;grid-row:3}.workspace-shell .bz-funnel-page .fn-tabs{gap:18px}.workspace-shell .bz-funnel-page .fn-listlayout{grid-template-columns:minmax(0,1fr)}#bz-fin{padding:20px 16px 48px!important}#bz-fin .bz-fin-hero{flex-direction:column;align-items:stretch;padding:24px;gap:18px}#bz-fin .bz-fin-hero strong{font-size:36px}#bz-fin .settings-card{padding:18px}#bz-fin .bz-fin-recipient{grid-template-columns:minmax(0,1fr)}#bz-fin .bz-fin-recipient .row{grid-column:1;grid-row:auto;margin-top:8px}#bz-fin .row input{flex:1 1 150px}#bz-fin .bz-fin-tabs{gap:24px}}
+/* Explicit page flow prevents the legacy title grid from narrowing inner sections. */
+.workspace-shell :is(.bz-products,.rd-orders,.bz-funnel-page){display:flex;flex-direction:column;align-items:stretch}
+.workspace-shell .rd-orders>.rd-table-card{width:100%;max-width:none;box-sizing:border-box}
+.workspace-shell .rd-orders .rd-table-tools{display:flex;flex-wrap:wrap}
+.workspace-shell .rd-orders .rd-table-tools .rd-search{flex:1 1 220px;max-width:420px}
+.workspace-shell .bz-funnel-page .fn-tabs{background:transparent;border-radius:0}
+@media(max-width:700px){.workspace-shell .rd-orders .rd-table-tools{display:grid}.workspace-shell .rd-orders .rd-table-tools .rd-search{max-width:none}}
+#bz-fin #bzfin-m{display:flex;flex-direction:column;align-items:stretch;gap:20px}
+#bz-fin #bzfin-m>.settings-card{width:100%;max-width:none;box-sizing:border-box}
+#bz-fin #bzfin-m .bz-fin-counts{grid-template-columns:repeat(2,minmax(0,1fr))}
+#bz-fin .bz-fin-hero button,#bz-fin #bzfin-s{background:var(--bv-primary);border:1px solid var(--bv-primary);color:#fff7ea;font:600 14px 'DM Sans',system-ui,sans-serif;cursor:pointer}
+#bz-fin #bzfin-s{padding:12px 20px;border-radius:10px}
+#bz-fin #bzfin-s:disabled{opacity:.55;cursor:wait}
+@media(max-width:700px){.workspace-shell .rd-orders .rd-tr:not(.rd-th){grid-template-columns:minmax(0,1fr) auto}.workspace-shell .rd-orders .rd-tr:not(.rd-th)>span:nth-child(3),.workspace-shell .rd-orders .rd-tr:not(.rd-th)>span:nth-child(4){display:block!important;font-size:12px}.workspace-shell .rd-orders .rd-tr:not(.rd-th)>span:nth-child(4){text-align:right;color:var(--bv-muted)}}
+.workspace-shell .bz-funnel-page .fn-tabs{border:0;border-bottom:1px solid var(--bv-line)}
+@media(max-width:700px){.workspace-shell .bz-funnel-page .rd-builder-bar{display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:16px}.workspace-shell .bz-funnel-page .rd-builder-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}.workspace-shell .bz-funnel-page .rd-builder-actions>button{flex:1 1 auto;padding:9px 10px;min-width:0;font-size:12px}.workspace-shell .bz-funnel-page .rd-builder-actions>button:last-child{white-space:normal}.workspace-shell .bz-funnel-page>.rd-funnel-head{flex-direction:row;align-items:center}.workspace-shell .bz-funnel-page>.rd-funnel-head>button{font-size:12px;padding:9px 12px}}
+
+/* Organização mantendo tokens e controles nativos. */
+#workspace-context-sidebar .bz-saldo-link,#workspace-context-sidebar .bz-recebedor-link{display:none!important}
+#workspace-context-sidebar .nav-direct-block{display:grid;gap:3px;margin:8px 0 16px}
+#workspace-context-sidebar .nav-direct-block>.bz-fin-item{margin:0;width:100%;min-height:44px}
+#workspace-context-sidebar .nav-group-toggle{min-height:44px}
+#workspace-context-sidebar .sidebar-bottom #bz-sub-link{display:flex;align-items:center;min-height:44px}
+.workspace-content[data-bz-organized] .page-title>p{max-width:68ch;line-height:1.6}
+.workspace-content[data-bz-organized] .settings-card{min-width:0}
+.workspace-content[data-bz-organized] .rd-tabs{max-width:100%;overflow-x:auto;gap:8px;flex-wrap:wrap}
+.workspace-content[data-bz-organized] .rd-tabs>button,.bz-receipt-links>a,.bz-receipt-links>span{display:inline-flex;align-items:center;min-height:44px;padding:10px 14px;text-decoration:none;color:var(--bv-muted);white-space:nowrap;border-bottom:2px solid transparent}
+.bz-receipt-links>.active{color:var(--bv-text);border-color:var(--bv-brand)}
+.workspace-content[data-bz-organized="recovery"] .settings-card,.workspace-content[data-bz-organized="followup"] .settings-card,.workspace-content[data-bz-organized="affiliates"] .settings-card,.workspace-content[data-bz-organized="files"] .settings-card{padding:22px;border-radius:14px}
+.workspace-content[data-bz-organized="recovery"] .settings-card p,.workspace-content[data-bz-organized="followup"] .settings-card p,.workspace-content[data-bz-organized="affiliates"] .settings-card p{max-width:72ch;line-height:1.6}
+.workspace-content[data-bz-organized] .resource-grid{gap:18px}
+.workspace-content[data-bz-organized] input,.workspace-content[data-bz-organized] select{max-width:100%}
+@media(max-width:700px){.workspace-content[data-bz-organized] .rd-tabs{gap:4px}.workspace-content[data-bz-organized] .settings-card{padding:18px}.workspace-content[data-bz-organized] .rd-split{grid-template-columns:minmax(0,1fr)}.bz-receipt-links{flex-direction:column;align-items:stretch}.workspace-content[data-bz-organized] .page-title h1{font-size:28px}}
+
+#workspace-context-sidebar .bz-sub-fallback{display:flex;align-items:center;gap:10px;min-height:44px;padding:10px 12px;color:var(--bv-muted);text-decoration:none}#workspace-context-sidebar:has(#bz-sub-link) .bz-sub-fallback:not(#bz-sub-link){display:none}.workspace-content .bz-link-options{margin:0}.workspace-content .bz-link-options summary{min-height:44px;display:flex;align-items:center;cursor:pointer}.workspace-content .bz-link-options-list{display:grid;gap:8px;padding-top:8px}.workspace-content .salelink-actions{align-items:start;flex-wrap:wrap}.workspace-content .salelink-actions>.bz-link-options{flex-basis:100%}.bz-recovery-tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--bv-line);padding-bottom:10px}.bz-recovery-tabs button{min-height:44px;padding:10px 16px;background:transparent;color:var(--bv-muted);border:1px solid var(--bv-line);border-radius:8px}.bz-recovery-tabs button[aria-selected=true]{color:var(--bv-text);border-color:var(--bv-brand);background:rgba(204,20,50,.08)}
+.workspace-shell.chat-home .workspace-content .salelink-actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important;min-width:0;align-items:stretch!important}.workspace-shell.chat-home .workspace-content .salelink-actions>.button{display:flex!important;align-items:center;justify-content:center;width:100%!important;min-width:0!important;min-height:44px!important;height:auto!important;max-height:80px!important;aspect-ratio:auto!important;margin:0!important;padding:11px 14px!important;white-space:normal;box-sizing:border-box}.workspace-shell.chat-home .workspace-content .salelink-actions>.bz-link-options{min-width:0!important;width:100%!important;display:block;flex-basis:auto}.workspace-shell.chat-home .workspace-content .bz-link-options-list>.button{width:100%;min-width:0;min-height:44px;height:auto;max-height:100px;aspect-ratio:auto;white-space:normal}.workspace-shell.chat-home .workspace-content .bz-link-options summary{min-height:44px;padding:8px 0}
+/* Funnel mobile repair 2026-10-17: cards grow with their controls. */
+.workspace-shell .bz-funnel-page{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:20px!important;min-width:0}
+.workspace-shell .bz-funnel-page>.rd-funnel-cards{grid-auto-rows:max-content;align-content:start}
+.workspace-shell .bz-funnel-page .rd-funnel-card{height:auto!important;max-height:none!important;min-width:0;box-sizing:border-box}
+.workspace-shell .bz-funnel-page .fn-delete{min-height:44px!important;padding:10px 14px!important;border:1px solid var(--bv-line);border-radius:8px;color:var(--bv-focus);justify-content:center;white-space:normal}
+@media(max-width:700px){
+.workspace-shell .bz-funnel-page>.rd-head{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:18px!important}
+.workspace-shell .bz-funnel-page>.rd-head .rd-head-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;width:100%;margin:0}
+.workspace-shell .bz-funnel-page>.rd-head .rd-head-actions>button{width:100%;min-width:0;min-height:48px;white-space:normal;line-height:1.35;padding:10px}
+.workspace-shell .bz-funnel-page>.rd-funnel-head{flex-direction:row!important;align-items:center!important;justify-content:space-between;gap:12px!important;margin:4px 0 0!important}
+.workspace-shell .bz-funnel-page>.rd-funnel-head h2{font-size:18px}
+.workspace-shell .bz-funnel-page>.rd-funnel-cards{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:max-content!important;gap:14px;max-height:none!important;height:auto!important;overflow:visible!important;scrollbar-gutter:auto}
+.workspace-shell .bz-funnel-page .rd-funnel-card{grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto auto;gap:14px 10px!important;min-height:0!important;padding:16px!important;align-items:center;overflow:visible;background:var(--bv-surface)!important}
+.workspace-shell .bz-funnel-page .rd-funnel-open{grid-column:1/-1;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;min-height:44px!important}
+.workspace-shell .bz-funnel-page .rd-funnel-open b{font-size:16px;line-height:1.45;white-space:normal;overflow-wrap:anywhere}
+.workspace-shell .bz-funnel-page .rd-funnel-open small{display:block;line-height:1.5}
+.workspace-shell .bz-funnel-page .rd-funnel-card>.rd-pill{grid-column:2;grid-row:2;justify-self:end;position:static}
+.workspace-shell .bz-funnel-page .rd-funnel-card>.wa-switch{grid-column:1!important;grid-row:2!important;min-height:44px;font-size:12px;gap:8px;line-height:1.4;min-width:0}
+.workspace-shell .bz-funnel-page .rd-funnel-metrics{grid-column:1!important;grid-row:3!important;gap:20px!important;min-width:0;align-items:center}
+.workspace-shell .bz-funnel-page .rd-funnel-metrics>div{display:flex;flex-direction:column;gap:2px}
+.workspace-shell .bz-funnel-page .fn-delete{grid-column:2!important;grid-row:3!important;font-size:12px!important;align-self:center}
+.workspace-shell .bz-funnel-page>.fn-tabs{display:flex;max-width:100%;min-height:48px;gap:16px;overflow-x:auto;position:static}
+.workspace-shell .bz-funnel-page .fn-savebar{position:static!important;inset:auto!important;margin:16px 0 0;flex-wrap:wrap;gap:10px;min-width:0;box-sizing:border-box}
+.workspace-shell .bz-funnel-page .fn-savebar>.fn-save-btn{flex:1;min-width:120px;min-height:44px}
+.workspace-shell .bz-funnel-page :is(.fn-studio,.fn-list-main,.fn-editor,.fn-nodebar){min-width:0;max-width:100%;box-sizing:border-box}
+}
+
+/* Chat IA: scoped presentation, preserving all operational controls. */
+.workspace-shell .chat-view{background:#0d0d10;color:#f1efec}
+.workspace-shell .chat-view .message-list{padding:28px max(24px,calc((100% - 800px)/2)) 24px!important;scroll-padding-bottom:24px;box-sizing:border-box}
+.workspace-shell .chat-view .message{width:100%;max-width:800px;margin:0 auto 28px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;box-sizing:border-box}
+.workspace-shell .chat-view .message.assistant{display:grid;grid-template-columns:28px minmax(0,1fr);gap:14px;align-items:start}
+.workspace-shell .chat-view .message.assistant .message-avatar{width:28px;height:28px;border:1px solid #ffffff12;border-radius:9px;background:#ffffff04}
+.workspace-shell .chat-view .message.assistant .message-avatar img{width:22px;height:22px;object-fit:contain}
+.workspace-shell .chat-view .message .message-content{min-width:0;max-width:100%;border:0!important;box-shadow:none!important;background:transparent!important;padding:0!important}
+.workspace-shell .chat-view .message.assistant .message-heading{margin:2px 0 10px;color:#b7b3bd;font-size:10px;letter-spacing:.12em;line-height:20px}
+.workspace-shell .chat-view .message.user{display:flex;justify-content:flex-end}
+.workspace-shell .chat-view .message.user :is(.message-avatar,.message-heading){display:none}
+.workspace-shell .chat-view .message.user .message-content{width:fit-content;max-width:85%;padding:12px 17px!important;background:#1c1b22!important;border:1px solid #ffffff09!important;border-radius:20px 20px 5px 20px}
+.workspace-shell .chat-view .message .markdown{font-size:15px;line-height:1.75;overflow-wrap:anywhere}
+.workspace-shell .chat-view .message .markdown p{margin:0 0 12px}
+.workspace-shell .chat-view .message .markdown p:last-child{margin-bottom:0}
+.workspace-shell .chat-view .composer-area{width:100%;max-width:880px;margin:0 auto;padding:12px 24px max(12px,env(safe-area-inset-bottom))!important;box-sizing:border-box;background:linear-gradient(180deg,#0d0d1000,#0d0d10 14px)}
+.workspace-shell .chat-view .composer{border:1px solid #ffffff25!important;border-radius:24px!important;background:#17171d!important;box-shadow:0 10px 36px #00000020!important;overflow:hidden}
+.workspace-shell .chat-view .composer:focus-within{border-color:#ad697b!important;box-shadow:0 0 0 1px #ad697b20,0 10px 36px #00000020!important}
+.workspace-shell .chat-view .composer textarea{display:block;width:100%;box-sizing:border-box;min-height:52px!important;max-height:160px!important;field-sizing:content;resize:none!important;padding:14px 18px 6px!important;border:0!important;outline:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#f1efec;font:inherit;font-size:16px;line-height:1.5}
+.workspace-shell .chat-view .composer textarea::placeholder{color:#99969f;opacity:1}
+.workspace-shell .chat-view .composer-bottom{padding:6px 10px 10px!important;border:0!important;background:transparent!important;gap:10px;align-items:center}
+.workspace-shell .chat-view .composer-actions{display:flex;align-items:center;gap:5px;min-width:0;flex-wrap:wrap}
+.workspace-shell .chat-view .composer-tool-button{min-width:40px;min-height:40px;padding:8px 10px!important;border:0!important;border-radius:12px!important;background:transparent!important;color:#b9b6c0;box-shadow:none!important;font-size:12px}
+.workspace-shell .chat-view .composer-tool-button:hover{background:#ffffff09!important;color:#f1efec}
+.workspace-shell .chat-view .composer-tool-button.recording{background:#dd19372b!important;color:#ff879a}
+.workspace-shell .chat-view .send-button{width:40px;height:40px;min-width:40px;border-radius:13px!important;border:0!important;background:#c71c3b!important;color:#fff!important;box-shadow:none!important}
+.workspace-shell .chat-view .send-button:disabled{background:#2a2933!important;color:#817d8d!important;opacity:1}
+.workspace-shell .chat-view .send-button.bz-stop{background:#f1efec!important;color:#17171d!important}
+.workspace-shell .chat-view .composer-caption{margin:8px 0 0!important;text-align:center;line-height:1.4;color:#98949f}
+.workspace-shell .chat-view .composer-caption small{font-size:10px}
+@media(max-width:700px){
+ .workspace-shell .chat-view .message-list{padding:22px 16px 16px!important}
+ .workspace-shell .chat-view .message{margin-bottom:25px!important}
+ .workspace-shell .chat-view .message.assistant{grid-template-columns:24px minmax(0,1fr);gap:10px}
+ .workspace-shell .chat-view .message.assistant .message-avatar{width:24px;height:24px;border-radius:8px}
+ .workspace-shell .chat-view .message.assistant .message-avatar img{width:19px;height:19px}
+ .workspace-shell .chat-view .message.user .message-content{max-width:90%;padding:11px 14px!important;border-radius:19px 19px 5px 19px}
+ .workspace-shell .chat-view .message .markdown{font-size:15px;line-height:1.7}
+ .workspace-shell .chat-view .composer-area{padding:8px 12px max(9px,env(safe-area-inset-bottom))!important}
+ .workspace-shell .chat-view .composer{border-radius:22px!important}
+ .workspace-shell .chat-view .composer textarea{padding:12px 15px 4px!important;min-height:48px!important}
+ .workspace-shell .chat-view .composer-tool-button{min-width:44px;min-height:44px;padding:8px!important}
+ .workspace-shell .chat-view .send-button{width:44px;height:44px;min-width:44px}
+ .workspace-shell .chat-view .composer-bottom{padding:2px 7px 7px!important;gap:5px}
+}
+
+/* Chat refinements: reading, composer and navigation only. */
+.workspace-shell .chat-view{position:relative;min-width:0}
+.workspace-shell .chat-view .markdown :is(h1,h2,h3,h4){line-height:1.3;letter-spacing:-.025em;margin:1.25em 0 .55em}
+.workspace-shell .chat-view .markdown :is(ul,ol){padding-left:1.5em;margin:.6em 0 1em}
+.workspace-shell .chat-view .markdown li+li{margin-top:.4em}
+.workspace-shell .chat-view .markdown :is(pre,.table-wrap){max-width:100%;overflow-x:auto;border-radius:12px}
+.workspace-shell .chat-view .markdown table{display:block;max-width:100%;overflow-x:auto}
+.workspace-shell .chat-view .message-list{overflow-anchor:none;scroll-behavior:auto}
+.workspace-shell .chat-view .composer textarea{max-height:180px!important;field-sizing:fixed}
+.workspace-shell .chat-view .bz-stop-sq{background:currentColor}
+.workspace-shell .chat-view .composer-actions{flex:1}
+.workspace-shell .chat-view .bz-chat-bottom{position:absolute;bottom:calc(var(--bz-composer-height,180px) + 12px);left:50%;transform:translateX(-50%);width:44px;height:44px;z-index:4;border-radius:50%;border:1px solid #ffffff35;background:#24222b;color:#f1efec;font-size:24px;box-shadow:0 5px 22px #0008;cursor:pointer}
+.workspace-shell .bz-chat-search{display:block;padding:0 12px 12px}
+.workspace-shell .bz-chat-search input{box-sizing:border-box;width:100%;min-height:44px;background:#18171e;color:#f1efec;border:1px solid #ffffff28;border-radius:12px;padding:10px 12px;font:inherit;font-size:14px}
+.workspace-shell .chat-rail-item button{min-height:44px}
+.workspace-shell .chat-rail-empty{line-height:1.6}
+.workspace-shell .chat-view :is(.error-banner,.temporary-note){line-height:1.6;overflow-wrap:anywhere}
+.workspace-shell .chat-view .thinking.bz-dots{color:#bbb5c1}
+@media(max-width:700px){.workspace-shell .chat-view .markdown :is(h1,h2){font-size:23px}.workspace-shell .chat-view .markdown h3{font-size:19px}.workspace-shell .bz-chat-search input{font-size:16px}.workspace-shell .chat-view .bz-chat-bottom{bottom:calc(var(--bz-composer-height,180px) + 12px)}}
+@media(prefers-reduced-motion:reduce){.workspace-shell .chat-view *{scroll-behavior:auto!important}.workspace-shell .chat-view .thinking.bz-dots>i{animation:none!important}}
+.workspace-shell .chat-view .bz-chat-recovery{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 15px;margin-bottom:10px;border:1px solid #ffffff25;border-radius:14px;color:#cbc5d1;font-size:13px;line-height:1.5}.workspace-shell .chat-view .bz-chat-recovery button{min-height:44px;border:1px solid #ffffff30;border-radius:10px;background:transparent;color:#f1efec;padding:8px 12px;font:inherit;cursor:pointer}
+body:has(.workspace-shell .chat-view) #bzvoz-b{display:none!important}
+.workspace-shell .chat-view .bz-chat-voice{font-size:19px!important}
+.workspace-shell .chat-view .bz-chat-voice>span{display:inline-block!important;color:currentColor!important;font-size:19px;line-height:1}
+@media(max-width:360px){.workspace-shell:has(.chat-view) .chat-topbar{padding-left:12px!important;padding-right:12px!important;gap:4px!important}.workspace-shell:has(.chat-view) .chat-menu-label{display:none!important}.workspace-shell:has(.chat-view) .chat-menu{min-width:44px;width:44px;padding:0!important;justify-content:center}.workspace-shell:has(.chat-view) .chat-top-brand{flex:0 0 auto;white-space:nowrap;font-size:16px}.workspace-shell:has(.chat-view) .chat-top-actions{gap:4px!important}}
+/* Chat evolution: presentation scoped to the existing authenticated workspace. */
+.workspace-shell .chat-view .composer textarea{min-height:44px!important;padding-top:11px!important;padding-bottom:7px!important}
+.workspace-shell .chat-view .composer{overflow:visible!important}
+.workspace-shell .chat-view .composer-actions{position:relative;flex-wrap:nowrap!important}
+.workspace-shell .chat-view .bz-composer-menu{position:relative}
+.workspace-shell .chat-view .bz-composer-menu>summary,.workspace-shell .bz-history-row summary,.workspace-shell .bz-message-options summary{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;list-style:none;cursor:pointer;border-radius:12px;color:#b9b6c0;font-size:23px}
+.workspace-shell summary::-webkit-details-marker{display:none}
+.workspace-shell .chat-view .bz-composer-popover{position:absolute;bottom:52px;left:0;z-index:15;width:220px;padding:8px;border:1px solid #ffffff28;border-radius:16px;background:#1c1b23;box-shadow:0 12px 40px #0008}
+.workspace-shell .chat-view .bz-composer-popover button{width:100%;justify-content:flex-start;gap:10px;text-align:left;font-size:14px!important}
+.workspace-shell .chat-view .bz-composer-popover button span{display:inline!important}
+.workspace-shell .chat-view .bz-composer-popover button svg:last-child:not(:first-child){display:none}
+.workspace-shell .bz-history-row{display:flex;gap:2px;align-items:center;position:relative;min-width:0}
+.workspace-shell .bz-history-row>button{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.workspace-shell .bz-history-row>details{flex:0 0 36px}
+.workspace-shell .bz-history-row summary{min-width:36px;font-size:18px}
+.workspace-shell .bz-history-row details[open]>button{display:block;width:100%;min-height:44px;background:#24212c;color:#f1efec;border:0;padding:10px 14px;text-align:left;font:inherit}
+.workspace-shell .bz-history-row details[open]{position:relative;z-index:16}
+.workspace-shell .bz-history-row details[open]>button{position:relative;right:120px;min-width:160px}
+.workspace-shell .bz-message-options{position:relative;display:flex;justify-content:flex-start;margin-top:6px;min-height:32px}
+.workspace-shell .message.user .bz-message-options{justify-content:flex-end}
+.workspace-shell .bz-message-options summary{min-height:36px;min-width:36px;font-size:18px;opacity:.5}
+.workspace-shell .bz-message-options details[open]>button{min-height:44px;padding:10px 14px;border:1px solid #ffffff28;background:#24212c;color:#f1efec;border-radius:10px;font:inherit}
+.workspace-shell .bz-message-options summary:hover,.workspace-shell .bz-message-options summary:focus-visible{opacity:1;background:#ffffff09}
+.workspace-shell .bz-edit-message{width:min(580px,calc(100vw - 32px));max-height:85dvh;overflow:auto;box-sizing:border-box;border:1px solid #ffffff30;border-radius:20px;background:#17161d;color:#f1efec;padding:24px}
+.workspace-shell .bz-edit-message::backdrop,.workspace-shell .bz-file-dialog::backdrop{background:#000b;backdrop-filter:blur(5px)}
+.workspace-shell .bz-edit-message h2{font-size:23px;letter-spacing:-.03em;margin:0 0 12px}
+.workspace-shell .bz-edit-message p{font-size:14px;line-height:1.6;color:#b9b6c0}
+.workspace-shell .bz-edit-message :is(textarea,input){width:100%;box-sizing:border-box;padding:14px;border:1px solid #ffffff45;border-radius:12px;background:#0f0e13;color:#f1efec;font:inherit;font-size:16px}
+.workspace-shell .bz-edit-message textarea{min-height:180px;max-height:45dvh;resize:vertical}
+.workspace-shell .bz-edit-message>div:last-child{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:16px}
+.workspace-shell .bz-edit-message button,.workspace-shell .bz-draft-conflict button{min-height:44px;padding:10px 16px;border:1px solid #ffffff30;background:transparent;color:#f1efec;border-radius:10px;font:inherit}
+.workspace-shell .bz-draft-conflict{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px;margin-bottom:10px;border:1px solid #b38d5660;background:#211c16;border-radius:14px;font-size:13px;line-height:1.5}
+.workspace-shell .bz-chat-versions{display:flex;justify-content:center;align-items:center;gap:12px;flex-shrink:0;padding:5px 12px;border-bottom:1px solid #ffffff0b;font-size:12px;color:#b9b6c0}
+.workspace-shell .bz-chat-versions button{width:44px;min-height:44px;border:0;background:transparent;color:#f1efec;font-size:23px;cursor:pointer}
+.workspace-shell .bz-chat-versions button:disabled{opacity:.3}
+.workspace-shell .bz-file-card{display:inline-flex;align-items:center;gap:10px;max-width:100%;padding:14px 18px;min-height:52px;border:1px solid #ffffff2a;border-radius:14px;background:#1b1922;color:#f1efec;font:inherit;text-align:left;overflow-wrap:anywhere;cursor:pointer}
+.workspace-shell .bz-file-card::before{content:'▤';font-size:22px;color:#ceadb8}
+.workspace-shell .bz-file-dialog{box-sizing:border-box;width:96vw;max-width:1200px;height:94dvh;max-height:94dvh;padding:0;border:1px solid #ffffff30;border-radius:18px;background:#15141b;color:#f1efec;overflow:hidden}
+.workspace-shell .bz-file-dialog[open]{display:flex;flex-direction:column}
+.workspace-shell .bz-file-dialog header{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #ffffff25}
+.workspace-shell .bz-file-dialog header strong{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.workspace-shell .bz-file-dialog header :is(a,button){display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;color:#f1efec;background:transparent;border:0;text-decoration:none;font:inherit}
+.workspace-shell .bz-file-dialog :is(iframe,img){width:100%;min-height:0;flex:1;border:0;object-fit:contain}
+.workspace-shell .bz-file-text{overflow:auto;padding:24px}
+.workspace-shell .bz-file-text pre{white-space:pre-wrap;font:inherit;line-height:1.75;overflow-wrap:anywhere}
+@media(max-width:700px){.workspace-shell .bz-edit-message{padding:20px}.workspace-shell .bz-file-dialog{width:100vw;height:100dvh;max-height:100dvh;max-width:100vw;border-radius:0}.workspace-shell .bz-message-options summary{min-width:44px;min-height:44px}.workspace-shell .bz-history-row summary{min-width:44px}.workspace-shell .bz-file-text{padding:20px}.workspace-shell .chat-view .composer-actions{gap:3px}.workspace-shell .bz-chat-versions{padding:0 8px}}
+@media(hover:hover){.workspace-shell .message:not(:hover):not(:focus-within) .bz-message-options summary{opacity:0}}
+
+.workspace-shell .bz-history-row details[open]>button{position:absolute;right:0;min-width:180px;z-index:20}.workspace-shell .bz-history-row details[open]>button:nth-of-type(1){top:44px}.workspace-shell .bz-history-row details[open]>button:nth-of-type(2){top:88px}
+
+/* History stays in a modal side panel at every viewport size. */
+.workspace-shell .chat-stage{grid-template-columns:minmax(0,1fr)!important}
+.workspace-shell .bz-history-drawer{position:fixed!important;inset:0 auto 0 0!important;margin:0!important;width:min(360px,calc(100vw - 24px));max-width:none!important;height:100dvh;max-height:100dvh;padding:0!important;border:0;border-right:1px solid #ffffff1c;border-radius:0 22px 22px 0;background:#111015;color:#eeeaf0;box-shadow:16px 0 70px #0007;overflow:hidden}
+.workspace-shell .bz-history-drawer:not([open]){display:none!important}
+.workspace-shell .bz-history-drawer::backdrop{background:#0009;backdrop-filter:blur(5px)}
+.workspace-shell .bz-history-drawer .chat-rail{position:static!important;display:flex!important;flex-direction:column!important;transform:none!important;visibility:visible!important;opacity:1!important;width:100%!important;max-width:none!important;height:100%!important;max-height:none!important;margin:0!important;border:0!important;padding:20px 16px!important;background:transparent!important;box-sizing:border-box}
+.workspace-shell .bz-history-drawer .chat-rail-list{min-height:0;flex:1;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.workspace-shell .bz-history-drawer .bz-history-row>button{min-width:0;flex:1;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.workspace-shell .bz-history-drawer .bz-history-row>button>span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.workspace-shell .bz-history-drawer .chat-rail-head{flex-shrink:0;gap:8px}
+.workspace-shell .bz-history-drawer .chat-rail-head h2{margin-right:auto;font-size:18px;font-weight:500}
+.workspace-shell .bz-history-drawer .chat-rail-all{flex-shrink:0;min-height:44px}
+.workspace-shell .chat-view.is-empty .chat-welcome{margin:0!important;padding:clamp(24px,6vh,60px) 20px 24px!important;flex:0 0 auto!important}
+.workspace-shell .chat-view.is-empty .workspace-central-brand{font-size:clamp(26px,4vw,36px)!important;gap:12px!important}
+.workspace-shell .chat-view.is-empty .workspace-central-brand img{width:32px!important;height:32px!important}
+.workspace-shell .chat-view.is-empty .chat-role{font-size:15px!important;line-height:1.6;max-width:36ch;margin:14px auto 0!important;color:#aaa5b0}
+@media(max-width:600px){.workspace-shell .bz-history-drawer{width:calc(100vw - 24px);max-width:360px!important}.workspace-shell .chat-view.is-empty .chat-welcome{padding-top:32px!important;padding-bottom:20px!important}}
+.workspace-shell .chat-history-toggle{display:inline-flex!important;width:44px!important;height:44px!important;min-width:44px;flex-shrink:0}
+
+.workspace-shell .bz-history-drawer .chat-rail-close{display:inline-flex!important;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+
+.workspace-shell .bz-pdf-preview{display:flex;flex-direction:column;min-height:0;flex:1}.workspace-shell .bz-pdf-preview nav{display:flex;align-items:center;justify-content:center;gap:16px;flex-shrink:0;border-bottom:1px solid #ffffff1c}.workspace-shell .bz-pdf-preview nav button{min-width:44px;min-height:44px;border:0;background:transparent;color:inherit;font-size:24px}.workspace-shell .bz-pdf-preview nav button:disabled{opacity:.35}.workspace-shell .bz-pdf-pages{flex:1;min-height:0;overflow:auto;padding:16px;overscroll-behavior:contain}.workspace-shell .bz-pdf-pages canvas{display:block;max-width:100%;height:auto;margin:auto;background:white}.workspace-shell .bz-pdf-pages canvas[hidden]{display:none}.workspace-shell .bz-pdf-pages p{font-size:14px;line-height:1.6}
+@media(max-width:700px){.workspace-shell .message .bz-message-options summary{opacity:.65!important}}
+
+/* Chat only: quiet controls, readable answers, keyboard-aware dock. */
+.workspace-shell .chat-stage{min-height:0;min-width:0}
+.workspace-shell .chat-view{min-width:0;isolation:isolate}
+.workspace-shell .chat-view .message-content{min-width:0;overflow-wrap:anywhere;line-height:1.75}
+.workspace-shell .chat-view .message-content p{margin:0 0 1em}
+.workspace-shell .chat-view .message-content :is(h1,h2,h3,h4){line-height:1.35;letter-spacing:-.02em;margin:1.5em 0 .65em}
+.workspace-shell .chat-view .message-content :is(h1,h2,h3,h4):first-child{margin-top:0}
+.workspace-shell .chat-view .message-content :is(ul,ol){padding-inline-start:1.4em;margin:.6em 0 1.2em}
+.workspace-shell .chat-view .message-content li+li{margin-top:.35em}
+.workspace-shell .chat-view .message-content pre{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;white-space:pre}
+.workspace-shell .chat-view .message-content table{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border-collapse:collapse;font-size:.92em}
+.workspace-shell .chat-view .message-content :is(th,td){padding:12px 14px;border-bottom:1px solid #ffffff18;min-width:110px;text-align:left;vertical-align:top}
+.workspace-shell .chat-view .message-content th{font-weight:600;color:#e6ddd2}
+.workspace-shell .chat-view .composer-area{padding-bottom:max(12px,env(safe-area-inset-bottom));background:linear-gradient(0deg,#0d0c10 85%,transparent)}
+.workspace-shell .chat-view .composer textarea{max-height:min(180px,30dvh)!important;line-height:1.55!important}
+.workspace-shell .chat-view .chat-dock{margin-top:auto!important;width:100%;padding-top:12px}
+.workspace-shell .chat-view.is-empty{display:flex!important;flex-direction:column;justify-content:flex-start!important}
+.workspace-shell .bz-chat-bottom{z-index:8;box-shadow:0 4px 20px #0006;border:1px solid #ffffff28;background:#201c23;color:#f0e7dc;min-width:44px;min-height:44px}
+.workspace-shell .bz-business-dialog{position:fixed;inset:0;margin:auto!important;color:#eee8df;background:radial-gradient(ellipse at top right,#35232b55,transparent 65%),#141216;border:1px solid #b899a145;border-radius:22px;width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:0;box-shadow:0 24px 100px #000b}
+.workspace-shell .bz-business-dialog::backdrop{background:#0009;backdrop-filter:blur(7px)}
+.workspace-shell .bz-business-dialog form{padding:26px;display:grid;gap:18px}
+.workspace-shell .bz-business-dialog header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.workspace-shell .bz-business-dialog h2{margin:0;font-size:24px;letter-spacing:-.03em;font-weight:500}
+.workspace-shell .bz-business-dialog p,.workspace-shell .bz-business-dialog small{color:#b1a9b1;font-size:13px;line-height:1.65;margin:0}
+.workspace-shell .bz-business-dialog label{display:grid;gap:8px;font-size:13px;color:#dfd3d8}
+.workspace-shell .bz-business-dialog :is(input:not([type=checkbox]),textarea){box-sizing:border-box;width:100%;border:1px solid #ffffff22;background:#0d0c10;color:#eee8df;border-radius:11px;padding:12px;font:inherit;font-size:16px;line-height:1.5;resize:vertical}
+.workspace-shell .bz-business-dialog :is(input,textarea,button):focus-visible{outline:2px solid #bd8395;outline-offset:3px}
+.workspace-shell .bz-business-dialog .bz-business-enabled{display:flex;align-items:center;gap:12px;min-height:44px}
+.workspace-shell .bz-business-dialog input[type=checkbox]{width:20px;height:20px;accent-color:#d9103b;flex-shrink:0}
+.workspace-shell .bz-business-dialog button{min-height:44px;border-radius:11px;background:#ffffff08;border:1px solid #ffffff20;color:inherit;padding:10px 16px;font:inherit;cursor:pointer}
+.workspace-shell .bz-business-dialog header button{font-size:23px;padding:4px 12px}
+.workspace-shell .bz-business-dialog footer{display:flex;justify-content:flex-end;gap:12px;position:sticky;bottom:-26px;background:#141216;padding:12px 0}
+.workspace-shell .bz-business-dialog button.primary{background:#cf0b35;border-color:#ed516d66}
+.workspace-shell .bz-business-dialog button:disabled{opacity:.5;cursor:default}
+@media(max-width:700px){
+ .workspace-shell .workspace-main:has(.chat-stage){height:var(--bz-visible-height,100dvh)!important;min-height:0!important;max-height:var(--bz-visible-height,100dvh)!important;overflow:hidden!important}
+ .workspace-shell .chat-stage{flex:1!important;overflow:hidden!important}
+ .workspace-shell .chat-view{height:100%!important;max-height:100%!important;overflow:hidden!important}
+ .workspace-shell .chat-view.has-messages .message-list{flex:1!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior-y:contain;scroll-padding-bottom:24px}
+ .workspace-shell .chat-view.is-empty .chat-welcome{padding:28px 18px 16px!important}
+ .workspace-shell .chat-view .composer-area{flex-shrink:0!important;margin-top:auto!important;padding-inline:12px!important}
+ .workspace-shell .chat-view .message-content{font-size:15px;line-height:1.75}
+ .workspace-shell .bz-business-dialog{width:calc(100vw - 20px);max-height:calc(var(--bz-visible-height,100dvh) - 20px);border-radius:18px}
+ .workspace-shell .bz-business-dialog form{padding:20px;gap:16px}
+ .workspace-shell .bz-business-dialog footer{bottom:-20px;flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){.workspace-shell .chat-view *{scroll-behavior:auto!important}}
+.workspace-shell .chat-view .bz-business-dialog :is(input:not([type=checkbox]),textarea){display:block!important;width:100%!important;min-height:48px!important;max-height:240px!important;height:auto!important;border:1px solid #ffffff26!important;background:#0d0c10!important;padding:12px!important;margin:0!important;color:#eee8df!important;font-size:16px!important;line-height:1.5!important;border-radius:11px!important;resize:vertical!important}
+.workspace-shell .chat-view .bz-business-dialog textarea{min-height:88px!important;overflow-y:auto!important}
+.workspace-shell .bz-business-dialog header{position:sticky;top:-20px;z-index:2;background:#141216;padding:8px 0}
+.workspace-shell .bz-business-dialog form>label{margin:0!important;padding:0!important}
+.workspace-shell .bz-business-dialog form{gap:14px}
+.workspace-shell .bz-business-dialog :is(th,td){white-space:normal}
+.workspace-shell .chat-view .message-content th{overflow-wrap:normal;word-break:normal;white-space:nowrap}
+
+/* Audit: message actions use the browser top layer, above the composer. */
+.workspace-shell .bz-message-menu-trigger{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:0;border-radius:12px;background:transparent;color:#b9b6c0;font-size:23px;cursor:pointer}
+.workspace-shell .bz-message-menu-trigger:hover,.workspace-shell .bz-message-menu-trigger:focus-visible{background:#ffffff0d;color:#f5eddf}
+.workspace-shell .bz-message-menu-popover{position:fixed;inset:auto;margin:0;padding:6px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overflow:auto;border:1px solid #ab829650;border-radius:14px;background:#201a22;color:#f5eddf;box-shadow:0 16px 48px #0008}
+.workspace-shell .bz-message-menu-popover:popover-open{display:grid;gap:6px}
+.workspace-shell .bz-message-menu-popover button{min-height:44px;padding:10px 16px;border:0;border-radius:9px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.workspace-shell .bz-message-menu-popover button:hover,.workspace-shell .bz-message-menu-popover button:focus-visible{background:#ffffff0d}
+.workspace-shell .bz-message-menu-popover button:disabled{opacity:.5;cursor:wait}
+.workspace-shell .bz-message-menu-popover p{max-width:280px;padding:8px;white-space:normal;overflow-wrap:anywhere;color:#ffc4ce;font-size:13px}
+.workspace-shell .chat-view #conversation-tools{max-height:min(230px,28dvh);overflow-y:auto;overscroll-behavior:contain;padding-block:10px}
+@media(max-width:700px){.workspace-shell .chat-view #conversation-tools{max-height:22dvh}.workspace-shell .chat-view .composer textarea{max-height:20dvh!important}}
+
+/* BUBBLEFIX 27/10: overflow-wrap:anywhere zerava o min-content e a bolha encolhia (uma silaba por linha). break-word + largura minima absoluta. Kill: __BZ_BUBBLEFIX='0'. */
+.workspace-shell .chat-view .message{min-width:min(26rem,calc(100vw - 32px))}
+.workspace-shell .chat-view .message-content,.workspace-shell .chat-view .message .markdown{overflow-wrap:break-word;word-break:normal;hyphens:manual}
+.workspace-shell .chat-view .message.user .message-content{min-width:min(18rem,calc(100vw - 80px))}
+.workspace-shell .chat-view .message.assistant .message-content{min-width:0}
+
+/* FORMATSTYLE css: leitura mais limpa das respostas (paragrafos curtos, listas, largura). Kill __BZ_BUBBLEFIX='0' */
+.workspace-shell .chat-view .message .markdown p{margin:0 0 .75em}
+.workspace-shell .chat-view .message .markdown p:last-child{margin-bottom:0}
+.workspace-shell .chat-view .message .markdown :is(ul,ol){margin:.4em 0 .9em;padding-left:1.35em}
+.workspace-shell .chat-view .message .markdown li{margin:.25em 0;line-height:1.6}
+.workspace-shell .chat-view .message .markdown strong{color:#fff;font-weight:650}
+.workspace-shell .chat-view .message.assistant .message-content{max-width:min(100%,74ch)}
+/* Shared presentation, scoped to Biziva workspaces. */
+:root{--bv-muted:#b8b6c0;--bv-line:#363741;--bv-field:#737581}
+.workspace-shell .workspace-content,.workspace-shell #bz-inshell{scroll-padding-top:24px}
+.workspace-shell .page-title h1{font-size:clamp(26px,3vw,34px)!important;line-height:1.2!important;margin:0 0 8px!important}
+.workspace-shell .page-title{gap:20px!important}
+.workspace-shell .page-title>div:first-child>p{max-width:68ch;margin:0 0 12px;line-height:1.55}
+.workspace-shell .eyebrow{font-size:11px;margin-bottom:8px}
+.workspace-shell :is(.rd-head,.rd-hero,.rd-dashboard-hero,.bz-fin-hero){padding:20px!important;min-height:0!important;margin-bottom:16px!important;box-shadow:none!important}
+.workspace-shell :is(.rd-hero,.rd-dashboard-hero,.bz-fin-hero) :is(h2,h3){font-size:22px!important}
+.workspace-shell :is(input,select,textarea){box-sizing:border-box;max-width:100%;color:var(--bv-text);border-color:var(--bv-field)}
+.workspace-shell :is(select,input:not([type=checkbox]):not([type=radio]):not([type=file])){min-height:44px;padding:10px 12px;font:inherit;background:var(--bv-surface,#15161b);border:1px solid var(--bv-field);border-radius:8px}
+.workspace-shell :is(button,a,summary,input,textarea,select):focus-visible{outline:2px solid var(--bv-focus,#f28a9a)!important;outline-offset:3px!important}
+.workspace-shell :is(.fn-tabs,.rd-tabs,.bz-adm-tabs,.bz-api-tabs){scroll-padding:16px;scrollbar-width:thin;min-width:0}
+.workspace-shell .settings-card{min-width:0;box-shadow:none!important;line-height:1.55}
+.workspace-shell .settings-card h2{font-size:19px}
+.workspace-shell :is(.resource-card,.rd-kpi){min-width:0}
+.workspace-shell .modal{max-height:calc(100dvh - 40px);overflow:auto;width:min(560px,calc(100vw - 32px));box-sizing:border-box}
+.workspace-shell .modal input,.workspace-shell .modal textarea{width:100%}
+.bz-audit-context{position:sticky;top:0;z-index:6;padding:12px 16px;border:1px solid var(--bv-line);border-radius:10px;background:var(--bv-surface,#15161b);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.bz-audit-context p{margin:0;color:var(--bv-muted);font-size:13px}
+.bz-audit-context strong{overflow-wrap:anywhere}
+.bz-duration-hint{display:block;margin:4px 0 10px;color:var(--bv-muted);font-size:12px}
+.bz-table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin}
+.bz-table-wrap table{width:100%;border-collapse:collapse}
+.bz-table-wrap caption{text-align:left;font-size:12px;color:var(--bv-muted);padding:8px 0}
+.bz-audit-search{display:block;max-width:420px;width:100%;margin:0 0 12px}
+.bzd{width:100%;min-width:0;box-sizing:border-box}
+.bzd .hero,.bzd .card{background:var(--bv-surface,#15161b)!important;box-shadow:none!important;border-radius:14px!important}
+.bzd .grid{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))!important}
+.bzd .fnl{max-height:none!important;overflow:visible!important;min-width:0}
+.bzd .opt{min-width:0;max-width:100%;overflow:visible;box-shadow:none!important}
+.bzd .opt .tt{min-width:0}
+.bzd .opt b,.bzd .opt small{white-space:normal!important;overflow-wrap:anywhere}
+.bzd .opt .av{width:30px;height:30px}.bzd .opt .ck{width:20px;height:20px}
+.workspace-content[data-bz-organized=settings]>section:first-of-type{scroll-margin-top:20px}
+.workspace-content[data-bz-organized=files] :is(h3,b),.workspace-content[data-bz-organized=library] :is(h3,b){overflow-wrap:anywhere}
+@media(max-width:700px){
+ .workspace-shell .workspace-content{padding:20px 16px 40px!important}
+ .workspace-shell .page-title{gap:16px!important}
+ .workspace-shell :is(.rd-hero,.rd-dashboard-hero,.bz-fin-hero){padding:16px!important}
+ .workspace-shell :is(.rd-hero,.rd-dashboard-hero,.bz-fin-hero) :is(h2,h3){font-size:19px!important}
+ .workspace-shell :is(.rd-head,.rd-builder-bar){gap:12px!important}
+ .workspace-shell .settings-card{padding:16px!important;border-radius:12px!important}
+ .workspace-shell :is(.rd-tabs,.fn-tabs){display:flex!important;flex-wrap:wrap!important;gap:4px!important;overflow:visible!important}
+ .workspace-shell :is(.rd-tabs,.fn-tabs)>button{min-height:44px;white-space:normal;flex:1 1 auto;padding:9px 10px!important}
+ .workspace-shell :is(.wa-lv-filters,.wa-inbox-filters){display:flex!important;flex-wrap:wrap!important;overflow:visible!important;gap:6px!important}
+ .workspace-shell .wa-lv-blank{display:none!important}
+ .workspace-shell .wa-lv-item{min-width:0}
+ .workspace-shell :is(.resource-grid,.rd-split){grid-template-columns:minmax(0,1fr)!important}
+ .workspace-shell .rd-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .workspace-shell .rd-kpi{padding:12px!important}.workspace-shell .rd-kpi strong{font-size:22px!important}
+ .bzd{padding:20px 16px 40px!important}.bzd .grid{grid-template-columns:minmax(0,1fr)!important}.bzd .card,.bzd .hero{padding:16px!important}
+ .bzd .opt{gap:9px;padding:12px}.bzd .drop .tx{min-width:0!important;flex-basis:calc(100% - 60px)}
+ .bzd .sum>div{min-width:0!important;flex-basis:40%}.bzd .kpi{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .bz-audit-context{position:static}.bz-table-wrap{margin-inline:0}
+}
+@media(prefers-reduced-motion:reduce){.workspace-shell *,body:has(.public-hero) *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+.workspace-shell .bz-products{display:flex;flex-direction:column}.workspace-shell .bz-products>.rd-head{order:-5}.workspace-shell .bz-products>.aff-mine-title{order:-4}.workspace-shell .bz-products>.aff-mine-title+.resource-grid{order:-3}.bzs{width:100%;min-width:0;box-sizing:border-box}.bzs .hero,.bzs .card{background:var(--bv-surface,#15161b)!important;box-shadow:none!important;border-radius:14px!important}.bzs .hero{padding:20px!important}@media(max-width:700px){.bzs{padding:20px 16px 40px!important}.bzs .card,.bzs .hero{padding:16px!important}}
+
+.workspace-content[data-bz-organized=create] .rd-hero{display:block!important;width:100%!important}.workspace-content[data-bz-organized=create] .rd-hero-copy{display:none!important}.workspace-content[data-bz-organized=create] .rd-hero>div:last-child{width:100%;max-width:none}.workspace-content[data-bz-organized=create]>.page-title>div:first-child{margin-bottom:0!important}.workspace-content[data-bz-organized=settings]{display:flex!important;flex-direction:column!important;gap:20px!important}.workspace-content[data-bz-organized=settings]>.settings-card{width:100%;box-sizing:border-box}.workspace-content[data-bz-organized=settings]>.settings-card:has(h2):first-child{order:10}.workspace-content[data-bz-organized=settings]>.page-title{order:-2}
+
+#bz-fin .bz-fin-hero{padding:18px!important;gap:12px!important;min-height:0!important}#bz-fin .bz-fin-hero strong{font-size:30px!important;line-height:1.15!important;margin:10px 0!important}#bz-fin .bz-fin-meta{margin:10px 0!important}#bz-fin .bz-fin-hero .sub{margin:8px 0!important}#bz-fin .bz-fin-tabs{margin:0!important;gap:8px!important;flex-wrap:wrap!important}#bz-fin .bz-fin-tabs button{min-height:44px!important}#bz-fin .page-title{margin-bottom:16px!important}#bz-fin #bzfin-m{gap:16px!important}#bz-adm .admin-tabs{scrollbar-width:thin;scroll-padding:16px}#bz-adm .admin-tabs button{min-height:44px}#bz-adm td details summary{font-size:12px;cursor:pointer;min-height:44px;display:flex;align-items:center}#bz-adm td pre{max-width:480px;max-height:260px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}#bz-adm .admin-footnote{color:var(--bv-muted)}
+
+.workspace-content[data-bz-organized=settings]>.first-steps-resume{order:10!important}.workspace-content[data-bz-organized=settings]>.page-title{order:-2!important}
+
+@media(max-width:700px){.bzd .drop{display:grid!important;grid-template-columns:38px minmax(0,1fr)!important}.bzd .drop .tx{flex:initial!important;min-width:0!important}.bzd .drop .btn{grid-column:1/-1;width:100%;justify-content:center}.bzd .hero,.bzd .hero h1,.bzd .hero .sub{text-align:left!important}.bzd .hero .ey{display:none}.bzd .hero .sub{font-size:14px;line-height:1.5}.bzd .steps{gap:5px;margin-top:12px}.bzd .steps span{font-size:11px;padding:4px 8px}}
+
+.workspace-shell .settings-card{margin-block:0!important}.workspace-shell .workspace-content .page-title:not(.page-stack){min-height:0!important;padding:0!important;margin:0 0 16px!important}.workspace-shell .workspace-content>.page-stack{row-gap:20px!important}.workspace-shell .lib-page .resource-card h3{white-space:normal!important;display:block!important;line-clamp:unset!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow-wrap:anywhere}.workspace-shell .lib-page .lib-grid{align-items:start}
+
+.workspace-shell textarea,.modal-overlay .modal textarea{background:#101115!important;color:#f5efdf!important;border:1px solid #737581!important;border-radius:8px;padding:12px;font:inherit;min-height:100px;resize:vertical;box-sizing:border-box}.modal-overlay .modal{width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;box-sizing:border-box;background:#15161b;color:#f5efdf}.modal-overlay .modal label{display:grid;gap:8px;margin:12px 0}.modal-overlay .modal :is(select,input:not([type=checkbox]):not([type=radio])){width:100%;min-height:44px;padding:10px 12px;border:1px solid #737581;border-radius:8px;background:#101115;color:#f5efdf;font:inherit;box-sizing:border-box}.modal-overlay .modal :is(input,select,textarea){font-size:16px;max-width:100%}.modal-overlay .modal .modal-title button{min-width:44px;min-height:44px}.modal-overlay .modal :focus-visible{outline:2px solid #f28a9a;outline-offset:3px}
+
+/* Auditoria 20/10: busca da Biblioteca/Criativos e alvos de toque. */
+.workspace-shell :is(.rd-search,.search-input,.history-search,.sidebar-history-search),.workspace-shell .wa-lv-search input,.workspace-shell .bz-indicate .bz-link-field input{background:#111014!important}
+.workspace-shell .lib-search{background:#151418!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:11px}
+.workspace-shell .lib-search input{background:transparent!important;color:#f5efdf}
+.workspace-shell .lib-search input::placeholder{color:#8f8a96}
+/* Mobile audit fixes. Preserve all controls, content and handlers. */
+@media(max-width:700px){
+ .workspace-shell .wa-live{grid-template-columns:minmax(0,1fr)}
+ .workspace-shell .wa-lv-side{min-width:0;max-width:100%}
+ .workspace-shell .wa-live,.workspace-shell .wa-live>*{min-width:0;max-width:100%;box-sizing:border-box}
+ .workspace-shell .wa-lv-search{display:flex;align-items:center;min-width:0;max-width:100%;width:auto;box-sizing:border-box;overflow:hidden}
+ .workspace-shell .wa-lv-search input{flex:1 1 auto;min-width:0;width:100%;max-width:100%;font-size:16px}
+ .workspace-shell .wa-lv-search button{flex:0 0 auto;min-width:40px;min-height:40px}
+ .workspace-shell .wa-lv-filters{min-width:0;max-width:100%;flex-wrap:wrap}
+ .workspace-shell .fn-stack{min-width:0;grid-template-columns:minmax(0,1fr)}
+ .workspace-shell .fn-stack>*{min-width:0;max-width:100%;box-sizing:border-box}
+ .workspace-shell .fn-stack pre{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+ .workspace-shell .fn-stack :is(p,.fn-media-name){overflow-wrap:anywhere}
+ .workspace-shell .fn-stack input[type=file]{min-width:0;max-width:100%;box-sizing:border-box}
+ .workspace-shell :is(input,textarea,select):not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]):not([type=hidden]){font-size:16px}
+ .workspace-shell :is(button:not([role=switch]),.text-button,.ghost-button,.primary-button,.secondary-button){min-height:44px}
+ .workspace-shell :is(.contextual-close,.history-toggle,.sidebar-toggle){min-width:44px;min-height:44px}
+ .workspace-shell label:has(>input[type=checkbox]){min-height:44px}
+}
+
+@media(max-width:700px){.workspace-shell #bz-fin-commissions-content{min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}}

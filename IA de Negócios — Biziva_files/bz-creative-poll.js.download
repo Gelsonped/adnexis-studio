@@ -1,0 +1,10 @@
+(function(){if(window.__bzCP)return;window.__bzCP=1;
+var PEND=/Estou editando a imagem anterior|ainda não há um arquivo confirmado/,timer=null;
+function nodes(){return Array.prototype.slice.call(document.querySelectorAll('.message.assistant .message-content'));}
+function hasPending(){return nodes().some(function(e){return PEND.test(e.textContent||'')});}
+function apply(list){list.forEach(function(u){nodes().forEach(function(e){if(!PEND.test(e.textContent||''))return;var a=e.querySelector('a[href*="'+u.requestId+'"]');if(!a)return;var ps=Array.prototype.slice.call(e.querySelectorAll('p'));var p=ps.filter(function(x){return PEND.test(x.textContent||'')})[0];if(p)p.textContent=String(u.content||'').split('\n\n')[0];});});}
+function schedule(ms){clearTimeout(timer);timer=setTimeout(tick,ms);}
+function tick(){if(document.hidden||!hasPending()){schedule(document.hidden?15000:12000);return;}
+ fetch('/api/bz/creative-refresh',{credentials:'same-origin',cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.updated&&j.updated.length)apply(j.updated);}).catch(function(){}).then(function(){schedule(8000)});}
+document.addEventListener('visibilitychange',function(){if(!document.hidden)schedule(500)});
+schedule(1500);})();

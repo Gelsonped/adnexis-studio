@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Impulso: criador de anúncios com IA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+:root{--bg:#F2F5F9;--surf:#fff;--ink:#0F2A43;--mut:#5B6B7C;--line:#DCE3EB;--sun:#F2A516;--sunink:#3A2800;--ok:#0B7A5E;--okbg:#DDF3EC;--warn:#8F5400;--warnbg:#FFF0D1;--bad:#B3261E;--badbg:#FBE3E1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1622;--surf:#12263A;--ink:#E8EEF5;--mut:#9DB0C3;--line:#223A52;--ok:#4FD1A8;--okbg:#0F3A30;--warn:#F2B84B;--warnbg:#3A2D10;--bad:#FF8A80;--badbg:#43191A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1622;--surf:#12263A;--ink:#E8EEF5;--mut:#9DB0C3;--line:#223A52;--ok:#4FD1A8;--okbg:#0F3A30;--warn:#F2B84B;--warnbg:#3A2D10;--bad:#FF8A80;--badbg:#43191A;color-scheme:dark}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.15;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;max-width:1040px;margin:0 auto;padding:16px 20px}
+.logo{font:700 22px "Bricolage Grotesque",system-ui,sans-serif;display:flex;align-items:center;gap:8px}
+.logo i{width:26px;height:26px;border-radius:50% 50% 50% 8px;background:var(--sun);display:inline-block}
+nav{display:flex;gap:4px}
+nav a{padding:8px 14px;border-radius:999px;color:var(--mut);text-decoration:none;font-weight:600}
+nav a.on{background:var(--ink);color:var(--bg)}
+nav a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+main{max-width:1040px;margin:0 auto;padding:8px 20px 56px}
+.sub{color:var(--mut);margin:6px 0 0;max-width:60ch}
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}
+.stat{flex:1 1 160px;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.stat b{display:block;font:700 34px "Bricolage Grotesque",system-ui,sans-serif}
+.stat span{color:var(--mut);font-size:14px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 28px;align-items:center}
+.step{padding:10px 16px;border-radius:10px;background:var(--surf);border:1px solid var(--line);font-weight:600}
+.step.on{background:var(--sun);border-color:var(--sun);color:var(--sunink)}
+.step.off{color:var(--mut);border-style:dashed;font-weight:400}
+.btn{background:var(--sun);color:var(--sunink);border:0;border-radius:10px;padding:12px 20px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.sm{padding:7px 12px;font-size:14px}
+.btn:disabled{opacity:.55;cursor:wait}
+.grid{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:24px;margin-top:20px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+form{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px}
+label{display:grid;gap:4px;font-weight:600;font-size:14px}
+input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px;width:100%;font-weight:400}
+textarea{min-height:76px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ad{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px;max-width:560px}
+.hd{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}
+.ang{font-weight:600;color:var(--mut);font-size:14px}
+.v{padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.v.ok{background:var(--okbg);color:var(--ok)}.v.warn{background:var(--warnbg);color:var(--warn)}.v.bad{background:var(--badbg);color:var(--bad)}
+.txt{margin:0 0 10px;white-space:pre-wrap}
+.img{border:1px dashed var(--line);border-radius:10px;padding:26px 14px;color:var(--mut);font-size:14px;text-align:center;background:var(--bg)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--bg);border-radius:0 0 10px 10px;padding:10px 12px}
+.bar small{display:block;color:var(--mut)}
+.cta{background:var(--line);padding:6px 12px;border-radius:6px;font-weight:600;font-size:14px;white-space:nowrap}
+.why{font-size:14px;color:var(--mut);margin:10px 0}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.empty{border:1px dashed var(--line);border-radius:14px;padding:32px 20px;color:var(--mut);max-width:560px}
+.empty b{color:var(--ink);display:block;margin-bottom:4px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.err{background:var(--badbg);color:var(--bad);padding:12px 14px;border-radius:10px;max-width:560px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="logo"><i></i>Impulso</div>
+<nav aria-label="Principal"><a href="#inicio" data-v="inicio">Início</a><a href="#criar" data-v="criar">Criar anúncios</a><a href="#meus" data-v="meus">Meus anúncios</a></nav></header>
+<main id="main"></main>
+<div id="toast" role="status"></div>
+<script>
+const K="impulso:v1",$=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S={saved:[],made:0,ok:0};
+try{S=Object.assign(S,JSON.parse(localStorage.getItem(K)||"{}"))}catch(e){}
+const persist=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+let form={produto:"",desc:"",publico:"",oferta:"",objetivo:"vendas",tom:"direto e confiável",idioma:"Português do Brasil",n:"4"};
+let res=[],busy="",errMsg="";
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),2200)}
+async function copy(t){try{await navigator.clipboard.writeText(t);toast("Copiado.")}catch(e){try{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();toast("Copiado.")}catch(x){toast("Não consegui copiar.")}}}
+const adText=a=>`Ângulo: ${a.angulo}\nTítulo: ${a.titulo}\nTexto: ${a.texto}\nDescrição: ${a.descricao}\nBotão: ${a.cta}\nImagem: ${a.ideia_imagem}`;
+const cls=v=>v==="aprovado"?"ok":v==="reprovar"?"bad":"warn";
+
+function inicio(){
+ const h=new Date().getHours(),g=h<12?"Bom dia":h<18?"Boa tarde":"Boa noite";
+ const rec=S.saved.slice(-3).reverse().map(a=>`<div class="step">${esc(a.titulo)}</div>`).join("");
+ $("#main").innerHTML=`<h1>${g}.</h1><p class="sub">Crie anúncios para Facebook e Instagram, passe cada um pelo Juiz e leve só os aprovados.</p>
+ <div class="stats"><div class="stat"><b>${S.made}</b><span>anúncios criados</span></div><div class="stat"><b>${S.ok}</b><span>aprovados pelo Juiz</span></div><div class="stat"><b>${S.saved.length}</b><span>salvos para usar</span></div></div>
+ <h2 style="font-size:18px">Como funciona</h2><div class="flow"><span class="step on">Criar</span><span class="step on">Juiz</span><span class="step on">Exportar</span><span class="step off">Testar no Meta (em breve)</span><span class="step off">Autopilot (em breve)</span></div>
+ <a class="btn" href="#criar">Criar anúncios</a>
+ ${rec?`<h2 style="font-size:18px;margin-top:32px">Últimos salvos</h2><div class="flow">${rec}</div>`:""}`;
+}
+
+function criar(){
+ const f=form,o=(v,l)=>`<option ${f[l]===v?"selected":""}>${v}</option>`;
+ $("#main").innerHTML=`<h1>Criar anúncios</h1><p class="sub">Conte sobre o produto. A IA escreve as versões e o Juiz confere cada uma.</p>
+ <div class="grid"><form id="f" onsubmit="return false">
+ <label>Produto ou serviço<input data-k="produto" value="${esc(f.produto)}" placeholder="Ex.: instalação de energia solar"></label>
+ <label>O que ele faz e por que é bom<textarea data-k="desc" placeholder="Benefícios reais, diferenciais, garantias">${esc(f.desc)}</textarea></label>
+ <label>Quem é o público<input data-k="publico" value="${esc(f.publico)}" placeholder="Ex.: donos de casa e pequenos comércios"></label>
+ <label>Oferta (opcional)<input data-k="oferta" value="${esc(f.oferta)}" placeholder="Ex.: orçamento grátis"></label>
+ <div class="two"><label>Objetivo<select data-k="objetivo">${["vendas","contatos (leads)","mensagens no WhatsApp"].map(v=>o(v,"objetivo")).join("")}</select></label>
+ <label>Quantidade<select data-k="n">${["3","4","5"].map(v=>o(v,"n")).join("")}</select></label></div>
+ <div class="two"><label>Tom<select data-k="tom">${["direto e confiável","simpático","urgente sem exagero","técnico"].map(v=>o(v,"tom")).join("")}</select></label>
+ <label>Idioma<select data-k="idioma">${["Português do Brasil","English","Español"].map(v=>o(v,"idioma")).join("")}</select></label></div>
+ <button class="btn" id="go" type="button">Criar anúncios</button></form><div id="out"></div></div>`;
+ renderRes();
+}
+
+function renderRes(){
+ const out=$("#out");if(!out)return;
+ const b=$("#go");if(b)b.disabled=!!busy;
+ if(busy){out.innerHTML=`<div class="empty"><b>${busy==="criar"?"Escrevendo as versões…":"O Juiz está revisando…"}</b>Isso leva alguns segundos.</div>`;return}
+ if(errMsg){out.innerHTML=`<div class="err">${esc(errMsg)}</div>`;return}
+ if(!res.length){out.innerHTML=`<div class="empty"><b>Seus anúncios aparecem aqui</b>Preencha o produto e a descrição e toque em “Criar anúncios”.</div>`;return}
+ out.innerHTML=res.map((a,i)=>`<article class="ad"><div class="hd"><span class="ang">${esc(a.angulo)}</span><span class="v ${cls(a.veredito)}">${esc(a.veredito)} · ${esc(a.nota)}/10</span></div>
+ <p class="txt">${esc(a.texto)}</p><div class="img">Imagem sugerida: ${esc(a.ideia_imagem)}</div>
+ <div class="bar"><div><b>${esc(a.titulo)}</b><small>${esc(a.descricao)}</small></div><span class="cta">${esc(a.cta)}</span></div>
+ <p class="why">${esc(a.motivo)}</p><div class="acts">
+ ${a.correcao&&a.veredito!=="aprovado"?`<button class="btn sm" data-a="fix" data-i="${i}">Usar correção do Juiz</button>`:""}
+ <button class="btn sm ghost" data-a="copy" data-i="${i}">Copiar</button><button class="btn sm ghost" data-a="save" data-i="${i}">Salvar</button></div></article>`).join("");
+}
+
+function meus(){
+ const l=S.saved;
+ $("#main").innerHTML=`<h1>Meus anúncios</h1><p class="sub">Os anúncios salvos ficam neste navegador. Exporte para colar no Gerenciador de Anúncios do Meta.</p>`+
+ (l.length?`<div class="row"><button class="btn sm" data-a="copyall">Copiar tudo</button><button class="btn sm ghost" data-a="txt">Baixar .txt</button><button class="btn sm ghost" data-a="csv">Baixar .csv</button></div>`+
+ l.map((a,i)=>`<article class="ad"><div class="hd"><span class="ang">${esc(a.angulo)}</span><span class="v ${cls(a.veredito)}">${esc(a.veredito)} · ${esc(a.nota)}/10</span></div><p class="txt">${esc(a.texto)}</p>
+ <div class="bar"><div><b>${esc(a.titulo)}</b><small>${esc(a.descricao)}</small></div><span class="cta">${esc(a.cta)}</span></div>
+ <div class="acts" style="margin-top:10px"><button class="btn sm ghost" data-a="copysaved" data-i="${i}">Copiar</button><button class="btn sm ghost" data-a="del" data-i="${i}">Remover</button></div></article>`).join("")
+ :`<div class="empty" style="margin-top:20px"><b>Nenhum anúncio salvo ainda</b>Crie anúncios e toque em “Salvar” nos que você gostar.</div><p><a class="btn" href="#criar">Criar anúncios</a></p>`);
+}
+
+const V={inicio,criar,meus};
+function route(){const v=V[(location.hash||"#inicio").slice(1)]?(location.hash||"#inicio").slice(1):"inicio";
+ document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.v===v));V[v]();window.scrollTo(0,0)}
+addEventListener("hashchange",route);
+
+async function download(name,data){try{const d=await claude.use("downloads");if(!d){toast("Download indisponível aqui. Use Copiar tudo.");return}await d.save({filename:name,data})}catch(e){if(!e||e.code!=="declined")toast("Não consegui baixar.")}}
+const csvCell=s=>'"'+String(s==null?"":s).replace(/"/g,'""')+'"';
+
+document.addEventListener("input",e=>{const k=e.target.dataset&&e.target.dataset.k;if(k)form[k]=e.target.value});
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-a],#go");if(!t)return;
+ if(t.id==="go")return run();
+ const a=t.dataset.a,i=+t.dataset.i;
+ if(a==="copy")copy(adText(res[i]));
+ if(a==="fix"){res[i].texto=res[i].correcao;res[i].veredito="aprovado";res[i].correcao="";res[i].motivo="Texto corrigido pelo Juiz.";renderRes();toast("Correção aplicada.")}
+ if(a==="save"){S.saved.push({...res[i]});persist();toast("Salvo em Meus anúncios.")}
+ if(a==="copysaved")copy(adText(S.saved[i]));
+ if(a==="del"){S.saved.splice(i,1);persist();meus()}
+ if(a==="copyall")copy(S.saved.map(adText).join("\n\n---\n\n"));
+ if(a==="txt")download("anuncios.txt",S.saved.map(adText).join("\n\n---\n\n"));
+ if(a==="csv")download("anuncios.csv","Angulo,Titulo,Texto,Descricao,Botao,Imagem\n"+S.saved.map(a=>[a.angulo,a.titulo,a.texto,a.descricao,a.cta,a.ideia_imagem].map(csvCell).join(",")).join("\n"));
+});
+
+async function run(){
+ if(busy)return;
+ if(!form.produto.trim()||!form.desc.trim()){toast("Preencha o produto e a descrição.");return}
+ let sample=null;try{sample=await claude.use("sample")}catch(e){}
+ if(!sample){errMsg="A IA só funciona com a página aberta no Claude. Abra o link pelo claude.ai.";renderRes();return}
+ errMsg="";res=[];busy="criar";renderRes();
+ try{
+  const f=form;
+  const ads=await sample.json(`Você é redator de anúncios para Facebook e Instagram. Crie ${f.n} anúncios, cada um com um ângulo diferente (dor, benefício, prova, urgência honesta, curiosidade). Idioma: ${f.idioma}. Tom: ${f.tom}. Objetivo: ${f.objetivo}.
+Produto: ${f.produto}. Detalhes: ${f.desc}. Público: ${f.publico||"não informado"}. Oferta: ${f.oferta||"nenhuma"}.
+Regras: sem promessa de resultado garantido, sem antes e depois, sem falar de características pessoais do leitor, sem MAIÚSCULAS em excesso, sem exageros. Limites: titulo até 40 caracteres, texto até 125 caracteres, descricao até 30 caracteres. cta deve ser um de: Saiba mais, Comprar agora, Fale conosco, Enviar mensagem, Cadastre-se. ideia_imagem: uma frase com a imagem ideal.
+Responda SOMENTE com um array JSON: [{"angulo":"","titulo":"","texto":"","descricao":"","cta":"","ideia_imagem":""}]`,{cache:false});
+  busy="juiz";renderRes();
+  const j=await sample.json(`Você é o Juiz: revisor rigoroso das políticas de anúncios do Meta e da qualidade do texto. Avalie cada anúncio (índice i, começando em 0): promessas garantidas, antes e depois, referência a características pessoais do leitor, exageros de saúde ou dinheiro, MAIÚSCULAS em excesso, clareza e oferta. Dê nota de 0 a 10. veredito: "aprovado" (nota 8 ou mais e sem risco), "ajustar" ou "reprovar". motivo: uma frase curta no idioma do anúncio. correcao: novo texto principal (até 125 caracteres) se não for aprovado, senão "".
+Anúncios: ${JSON.stringify(ads)}
+Responda SOMENTE com um array JSON: [{"i":0,"nota":8,"veredito":"aprovado","motivo":"","correcao":""}]`,{cache:false});
+  res=ads.map((a,i)=>{const r=j.find(x=>x.i===i)||{};return {...a,nota:r.nota==null?0:r.nota,veredito:r.veredito||"ajustar",motivo:r.motivo||"",correcao:r.correcao||""}});
+  S.made+=res.length;S.ok+=res.filter(a=>a.veredito==="aprovado").length;persist();
+ }catch(e){errMsg=e&&e.code==="not_granted"?"Sem permissão para usar a IA. Toque em Criar anúncios de novo e aceite o pedido.":"Não consegui criar agora. Tente de novo em instantes."}
+ busy="";renderRes();
+}
+route();
+</script>
+</body>
+</html>
