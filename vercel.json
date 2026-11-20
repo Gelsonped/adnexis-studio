@@ -3,5 +3,11 @@
     "api/ads-generate.js": {
       "maxDuration": 60
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/AdNexis-v4-preview.html"
+    }
+  ]
 }
