@@ -3,8 +3,8 @@
 // Depois inclua este arquivo
 
 // CONFIG - Substitua pelas suas credenciais do Supabase
-const SUPABASE_URL = 'https://SEU_PROJETO.supabase.co';
-const SUPABASE_ANON_KEY = 'SUA_ANON_KEY';
+const SUPABASE_URL = 'https://ggbrtiukhxmhhjfbovxi.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_2HXgqicKG42cbQ1BqitURg_LtDoe4Tq';
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
